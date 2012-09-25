@@ -1,0 +1,82 @@
+1.文件夹搜索是Ctrl+I
+2.注释//         Ctrl+Q  
+3.         Ctrl+Shift+Q
+4. 代码提示   Ctrl+Alt+space
+5. 复制一行   Ctrl+D
+6. 交换行     Ctrl+T
+7. ctrl+shift+1    自动完成代码，这个功能是FD代码提示最有用一个，他可以用来自动生成GET、SET，自动申明变量、方法，自动导入类（还有些以后补）
+8. ctrl+b        范例代码        for、if等代码段的模板，只要按下这个键就可生成
+9. ctrl+shift+k        颜色代码拾取器
+10. ctrl+shift+f    代码收起
+11. ctrl+shift+a     代码全部收起
+12. ctrl+shift+e    代码全部展开
+13. ctrl+shift+n   复制代码到一个新文件
+14. ctrl+shift+i     生成了uid
+15. F4    跳转到指定方法或类或变量被定义的地方
+16. shift+f4    跳回到之前所有的地方
+17. 选中代码段后--右键-- Save As Snippet    保存为模板
+18. ctrl+\    移到下个大写或标点或空格后
+19. ctrl+]    移动下个空行后
+20. ctrl+space 自动完成代码
+21. ctrl+alt+space 自动生成代码 
+只是随便翻译，看着能应用就好。--ps:有些不能用的
+
+FlashDeveblop 快捷键
+===========================
+Ctrl+SPACE = 自动填充.
+Ctrl+Alt+SPACE = 用类名自动填充
+Ctrl+Shift+SPACE = 提示光标所在的方法需要的参数
+Ctrl+Shift+1 = Template generation.(产生一个模板)
+Ctrl+B = 范例代码,for、if等代码段的模板 You can add/edit snippets by Tools->General Tools->Snippet Editor
+Ctrl+J = 激活TypeExplorer窗口。它有助于找到类名的首字母的类。您可以立即开类。
+F5, Ctrl+Enter = 编译项目
+Ctrl+Shift+K = 插入颜色
+Ctrl+Shift+I = 插入的GUID。
+
+代码导航
+===========================
+F4 = 跳到方法、类、属性的声明处。
+Shift+F4 = 返回(相对于F4)
+F12 = 跳到下一处错误
+Shift+F12 = 转到上一处错误
+Ctrl+[ = 转到下一个声明（声明变量或函数，条件语句，new operator 等等.)
+Ctrl+] = 转到前面的statement
+Ctrl+Shift+F = 展开/折叠当前行
+Ctrl+Shift+A = 全部折叠
+Ctrl+Shift+E = 全部展开
+Ctrl+G = 转到行号...
+
+编辑
+===========================
+双击单词 = 选定单词
+Ctrl+U = 所选单词转换为大写
+Ctrl+L = 所选单词转换为小写
+Ctrl+右箭头=转到下一个字
+Ctrl+左箭头=转到前一个字
+Ctrl+向上箭头=向上滚动窗口
+Ctrl+向下箭头=向下滚动窗口
+Ctrl+/ = 转到前面subword (单独的词或子字开头的大写字母。例如，subword "Count" in word "filesCount")
+Ctrl+\ = 转到下一个subword
+Alt+Home = 跳到行头
+Alt+End = 跳到行末
+Ctrl+Home= 转到文件开始
+Ctrl+End = 转到文件末尾.
+Ctrl+D = 复制行
+Ctrl+T = 与上一行交换位置
+Ctrl+Shift+D = 删除当前行
+Ctrl+Q = “//”注释行
+Ctrl+Shift+Q =
+
+搜索
+===========================
+Ctrl+F = 当前窗口搜索
+Ctrl+H = 当前窗口替换
+Ctrl+I = 在文件中搜索
+F3 = 转到下一个word(光标所在的word)的用法
+Shift+F3 = 转到上一个word(光标所在的word)的用法
+
+窗口管理
+===========================
+Ctrl+PgUP = Goto between tabs from right to left
+Ctrl+PgDown = Goto between tabs from left to right
+Alt+Shift+Enter = 编辑窗口全屏 
