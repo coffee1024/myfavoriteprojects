@@ -29,22 +29,23 @@
 		<property name="locations">
 			<list>
 				<!-- 标准配置 -->
-				<value>classpath:/properties/*.properties</value>
+				<value>classpath:/resources/properties/*.properties</value>
 				<!-- 服务器生产环境配置 -->
 				<!-- <value>file:/var/app/application.server.properties</value> -->
 			</list>
 		</property>
 	</bean>
 
-	<bean id="cacheManager"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-		<property name="configLocation">
-			<value>classpath:/spring/ehcache.xml</value>
-		</property>
-	</bean>
+<!--	<bean id="cacheManager"-->
+<!--		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
+<!--		<property name="configLocation">-->
+<!--			<value>classpath:/spring/ehcache.xml</value>-->
+<!--		</property>-->
+<!--	</bean>-->
 	
 	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="com" />
 	<aop:aspectj-autoproxy/>
+	<import resource="/resources/spring/appctx*.xml" />
 
 </beans>
