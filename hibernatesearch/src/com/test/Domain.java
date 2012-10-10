@@ -1,29 +1,41 @@
 package com.test;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 
 /**
  *@author  liuguangqiang
  *@date    2012-9-24 下午05:38:34
  *@version 1.0
  **/
-@Repository
-public class Domain{  
-	@Anno(isAop = "Y")
-    public void save(String name) {  
-        System.out.println("我是save方法");  
-    }  
-  
-    public void update(String name, Integer id) {  
-          
-        System.out.println("我是update()方法");  
-    }  
-  
-    public String getPersonName(Integer id) {  
-          
-        System.out.println("我是getPersonName()方法");  
-        return "xxx";  
-    }  
-  
+@Entity
+@Table(name="TEST")
+public class Domain{ 
+	@GeneratedValue(generator = "paymentableGenerator")  
+	@GenericGenerator(name = "paymentableGenerator", strategy = "sequence",parameters = { @Parameter(name = "sequence", value = "SEQ_TEST") })
+	@Column(name = "ID")
+	private Integer id;
+	@Column(name="CONTENT")
+	private String content;
+	
+	
+    public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 }  
