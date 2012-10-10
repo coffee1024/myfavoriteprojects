@@ -4,11 +4,16 @@
           "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 <session-factory>
-	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-	<property name="connection.url">jdbc:mysql://127.0.0.1:3306/travelmanager?useUnicode=true&amp;characterEncoding=utf8</property>
-	<property name="connection.username">root</property>
-	<property name="connection.password">root</property>
-	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+	<property name="connection.url">jdbc:oracle:thin:@127.0.0.1:1521/orcl</property>
+	<property name="connection.username">test</property>
+	<property name="connection.password">test</property>
+	<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+<property name = "hibernate.search.default.directory_provider" >   
+          org.hibernate.search.store.FSDirectoryProvider   
+</property>   
+<property   name = "hibernate.search.default.indexBase" >   
+          E:/temp/index   
+</property >  
 </session-factory>
-
 </hibernate-configuration>
