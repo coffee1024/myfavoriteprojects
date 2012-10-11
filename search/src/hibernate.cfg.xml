@@ -16,7 +16,7 @@
 <property   name = "hibernate.search.default.indexBase" >   
           E:/temp/index   
 </property >
-<mapping resource="com/lgq/resources/domain.hbm.xml" />
+<mapping class="com.lgq.domain.Domain" />
 <event type="post-update">  
             <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
         </event>  

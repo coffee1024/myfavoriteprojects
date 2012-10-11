@@ -11,8 +11,9 @@ import com.lgq.domain.Domain;
 public class Test {
 	public static void main(String[] args) {
 		DomainDao dao=new DomainDao();
-		Domain domain=new Domain();
-		domain.setContent("你好你好你好你是中国人");
-		dao.addDomain(domain);
+//		Domain domain=new Domain();
+//		domain.setContent("我是刘光强，请问你是谁");
+//		dao.addDomain(domain);
+		System.out.println(dao.getDomainByContent("我是请问谁").get(0).getContent());
 	}
 }
