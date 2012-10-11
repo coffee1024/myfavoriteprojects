@@ -28,8 +28,7 @@ public class HibernateSessionFactory {
 			serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry(); 
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry); 
 		} catch (Exception e) {
-			System.err.println(("创建SessionFactory失败："+e.getMessage()));
-			logger.error("创建SessionFactory失败："+e.getMessage());
+			e.printStackTrace();
 		}
     }
     private HibernateSessionFactory() {
@@ -70,8 +69,7 @@ public class HibernateSessionFactory {
 			serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry(); 
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry); 
 		} catch (Exception e) {
-			System.err.println(("创建SessionFactory失败："+e.getMessage()));
-			logger.error("创建SessionFactory失败："+e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

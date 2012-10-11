@@ -9,11 +9,31 @@
 	<property name="connection.username">test</property>
 	<property name="connection.password">test</property>
 	<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 <property name = "hibernate.search.default.directory_provider" >   
-          org.hibernate.search.store.FSDirectoryProvider   
+          org.hibernate.search.store.impl.FSDirectoryProvider   
 </property>   
 <property   name = "hibernate.search.default.indexBase" >   
           E:/temp/index   
-</property >  
+</property >
+<mapping resource="com/lgq/resources/domain.hbm.xml" />
+<event type="post-update">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event>  
+        <event type="post-insert">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event>  
+        <event type="post-delete">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event>  
+        <event type="post-collection-recreate">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event>  
+        <event type="post-collection-remove">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event>  
+        <event type="post-collection-update">  
+            <listener class="org.hibernate.search.event.FullTextIndexEventListener" />  
+        </event> 
 </session-factory>
 </hibernate-configuration>

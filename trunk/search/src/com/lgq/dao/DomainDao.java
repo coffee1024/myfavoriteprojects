@@ -19,9 +19,11 @@ public class DomainDao {
 			fullTextSession.save(domain);
 			transaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			transaction.rollback();
 		}finally{
-			HibernateSessionFactory.closeSession();
+			fullTextSession.close();
+//			HibernateSessionFactory.closeSession();
 		}
 		
 	}
