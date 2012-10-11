@@ -1,7 +1,13 @@
 package com.lgq.dao;
 
-import org.hibernate.Session;
+import java.util.List;
+
+import net.paoding.analysis.analyzer.PaodingAnalyzer;
+
+import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.util.Version;
 import org.hibernate.Transaction;
+import org.hibernate.search.FullTextQuery;
 import org.hibernate.search.FullTextSession;
 
 import com.lgq.domain.Domain;
@@ -26,5 +32,20 @@ public class DomainDao {
 //			HibernateSessionFactory.closeSession();
 		}
 		
+	}
+	public List<Domain> getDomainByContent(String content){
+		FullTextSession fullTextSession =HibernateSessionFactory.getFullTextSession();
+		try {
+			QueryParser parser =  new  QueryParser(Version.LUCENE_CURRENT, "content", new PaodingAnalyzer()); 
+			FullTextQuery query=fullTextSession.createFullTextQuery(parser.parse(content), Domain.class);
+			List<Domain> list=query.list();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			fullTextSession.close();
+//			HibernateSessionFactory.closeSession();
+		}
 	}
 }
