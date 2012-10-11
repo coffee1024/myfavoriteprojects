@@ -12,7 +12,7 @@ public class Test {
 	public static void main(String[] args) {
 		DomainDao dao=new DomainDao();
 		Domain domain=new Domain();
-		domain.setContent("123123123123");
+		domain.setContent("你好你好你好你是中国人");
 		dao.addDomain(domain);
 	}
 }
