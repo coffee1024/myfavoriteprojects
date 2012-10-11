@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tables>
+<table name="adminuser">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="user_name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+<table name="customer">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="user_name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+<table name="admingroup">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="group_name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+<table name="customergroup">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="group_name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+<table name="route">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="days">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="keywords">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+<table name="travelagency">
+	<field column="id">
+		<key name="store">YES</key>
+		<key name="index">NOT_ANALYZED </key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="name">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="address">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+	<field column="description">
+		<key name="store">YES</key>
+		<key name="index">ANALYZED</key>
+		<key name="termVector">WITH_POSITIONS_OFFSETS</key>
+	</field>
+</table>
+</tables>

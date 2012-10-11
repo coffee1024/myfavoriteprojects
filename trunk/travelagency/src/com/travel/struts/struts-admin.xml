@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin" namespace="/admin" extends="travel-default">
+		<action name="login" class="com.travel.action.admin.LoginAction" method="login">
+			<result name="success"  type="redirectAction">tomain</result>
+			<result name="error" type="redirectAction">tologin</result>
+		</action>
+		<action name="logout" class="com.travel.action.admin.LoginAction" method="logout">
+			<result name="success"  type="redirectAction">tologin</result>
+			<result name="error" type="redirectAction">tologin</result>
+		</action>
+		<action name="checkcode" class="com.travel.action.admin.LoginAction" method="checkcode">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="userexist" class="com.travel.action.admin.UserExist">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="customerexist" class="com.travel.action.admin.CustomerExist">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="getalluser" class="com.travel.action.admin.ListUserAction">
+
+			<result name="success">/WEB-INF/admin/user/listuser.jsp</result>
+		</action>
+		<action name="getallroute" class="com.travel.action.admin.ListRouteAction">
+			<result name="success">/WEB-INF/admin/route/listroute.jsp</result>
+		</action>
+		<action name="getallagency" class="com.travel.action.admin.ListAgencyAction">
+			<result name="success">/WEB-INF/admin/agency/listagency.jsp</result>
+		</action>
+		<action name="getallcustomer" class="com.travel.action.admin.ListCustomerAction">
+			<result name="success">/WEB-INF/admin/user/listcustomer.jsp</result>
+		</action>
+		<action name="adduser" class="com.travel.action.admin.AddUser">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="addcustomer" class="com.travel.action.admin.AddCustomer">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="addagency" class="com.travel.action.admin.AddAgency">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="addroute" class="com.travel.action.admin.AddRoute">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="changepwd" class="com.travel.action.admin.ChangePWD">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="loaddb" class="com.travel.action.admin.LoadDB">
+			<result name="success">/WEB-INF/admin/user/ok.jsp</result>
+			<result name="error">/WEB-INF/admin/user/error.jsp</result>
+		</action>
+		<action name="deleteuser" class="com.travel.action.admin.DeleteUser">
+			<result name="success" type="redirectAction" >getalluser.action?pageNo=${pageNo}</result>
+		</action>
+		<action name="deleteroute" class="com.travel.action.admin.DeleteRoute">
+			<result name="success" type="redirectAction" >getallroute.action?pageNo=${pageNo}</result>
+		</action>
+		<action name="deleteagency" class="com.travel.action.admin.DeleteAgency">
+			<result name="success" type="redirectAction" >getallagency.action?pageNo=${pageNo}</result>
+		</action>
+		<action name="deletecustomer" class="com.travel.action.admin.DeleteCustomer">
+			<result name="success" type="redirectAction" >getallcustomer.action?pageNo=${pageNo}</result>
+		</action>
+		<action name="tocustomerinfo" class="com.travel.action.admin.CustomerInfo">
+			<result>/WEB-INF/admin/user/customerinfo.jsp</result>
+		</action>
+		<action name="touserinfo" class="com.travel.action.admin.UserInfo">
+			<result>/WEB-INF/admin/user/userinfo.jsp</result>
+		</action>
+		<action name="torouteinfo" class="com.travel.action.admin.RouteInfo">
+			<result>/WEB-INF/admin/route/routeinfo.jsp</result>
+		</action>
+		<action name="toagencyinfo" class="com.travel.action.admin.AgencyInfo">
+			<result>/WEB-INF/admin/agency/agencyinfo.jsp</result>
+		</action>
+		<action name="toadduser"  class="com.travel.action.admin.GetGroupAction">
+			<result>/WEB-INF/admin/user/adduser.jsp</result>
+		</action>
+		<action name="toaddcustomer"  class="com.travel.action.admin.GetCusGroupAction">
+			<result>/WEB-INF/admin/user/addcustomer.jsp</result>
+		</action>
+		<action name="toaddagency">
+			<result>/WEB-INF/admin/agency/addagency.jsp</result>
+		</action>
+		<action name="toaddroute">
+			<result>/WEB-INF/admin/route/addroute.jsp</result>
+		</action>
+	</package>
+</struts>

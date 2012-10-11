@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERDiagram version="1.1">
+  <Connection session="Mysql" database="travelmanager" />
+  <Drawing gridVisible="false" snapOn="false" fastRouting="false" labelsVisible="true" />
+  <Tables>
+    <Table name="admingroup">
+      <Drawing expanded="true" location="719,34" dimensions="222,110" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="group_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="group_level" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="adminuser">
+      <Drawing expanded="true" location="408,21" dimensions="211,190" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="user_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="password" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="phone" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="group_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="last_ip" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="30" />
+        </Column>
+        <Column name="last_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="customer">
+      <Drawing expanded="true" location="406,489" dimensions="211,190" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="user_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="password" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="phone" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="group_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="last_ip" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="30" />
+        </Column>
+        <Column name="last_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="customergroup">
+      <Drawing expanded="true" location="725,529" dimensions="222,110" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="group_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="group_level" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="route">
+      <Drawing expanded="true" location="723,251" dimensions="211,170" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="begintime" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="endtime" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="days" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="keywords" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="searchwords">
+      <Drawing expanded="true" location="72,521" dimensions="202,110" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="searchnum" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="pinyin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="words" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="suggestwords">
+      <Drawing expanded="true" location="73,36" dimensions="202,110" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="searchnum" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="pinyin" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="words" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="travelagency">
+      <Drawing expanded="true" location="408,281" dimensions="216,130" />
+      <Columns>
+        <Column name="id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="20" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="address" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="2000" />
+        </Column>
+      </Columns>
+    </Table>
+  </Tables>
+  <Relationships />
+</ERDiagram>
+

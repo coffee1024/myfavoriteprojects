@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="travel-default" namespace="/" extends="json-default">
+		<interceptors> 
+			<interceptor name="checklevel" class="com.travel.interceptor.CheckLevel"></interceptor>
+		</interceptors>
+ 		<global-results> 
+			<result name="error">/WEB-INF/admin/user/login.jsp</result>
+		</global-results>
+		<action name="tologin">
+			<result>/WEB-INF/admin/user/login.jsp</result>
+		</action>
+		<action name="tocenter">
+			<result>/WEB-INF/admin/user/center.jsp</result>
+		</action>
+		<action name="todown">
+			<result>/WEB-INF/admin/user/down.jsp</result>
+		</action>
+		<action name="toleft">
+			<result>/WEB-INF/admin/user/left.jsp</result>
+		</action>
+		<action name="tomain">
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
+			<interceptor-ref name="checklevel" ></interceptor-ref> 
+			<result>/WEB-INF/admin/user/main.jsp</result>
+		</action>
+		<action name="totop">
+			<result>/WEB-INF/admin/user/top.jsp</result>
+		</action>
+		<action name="tochangepwd">
+			<result>/WEB-INF/admin/user/changepwd.jsp</result>
+		</action>
+		<action name="towelcome">
+			<result>/WEB-INF/admin/user/welcome.jsp</result>
+		</action>
+		<action name="tobackup">
+			<result>/WEB-INF/admin/db/backup.jsp</result>
+		</action>
+		<action name="toload">
+			<result>/WEB-INF/admin/db/load.jsp</result>
+		</action>
+		<action name="tosearchroute">
+			<result>/WEB-INF/admin/route/searchroute.jsp</result>
+		</action>
+		<action name="searchroute" class="com.travel.action.lucene.SearchRoute">
+			<result>/WEB-INF/admin/route/searchroute.jsp</result>
+		</action>
+		<action name="tosearchagency">
+			<result>/WEB-INF/admin/agency/searchagency.jsp</result>
+		</action>
+		<action name="searchagency" class="com.travel.action.lucene.SearchAgency">
+			<result>/WEB-INF/admin/agency/searchagency.jsp</result>
+		</action>
+		<action name="tosearchuser">
+			<result>/WEB-INF/admin/user/searchuser.jsp</result>
+		</action>
+		<action name="searchuser" class="com.travel.action.lucene.SearchUser">
+			<result>/WEB-INF/admin/user/searchuser.jsp</result>
+		</action>
+		<action name="searchcustomer" class="com.travel.action.lucene.SearchCustomer">
+			<result>/WEB-INF/admin/user/searchcustomer.jsp</result>
+		</action>
+		<action name="tosearchcustomer">
+			<result>/WEB-INF/admin/user/searchcustomer.jsp</result>
+		</action>
+		<action name="rand" class="com.travel.action.RandAction">
+			<result type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">image/jpeg</param>
+			</result>
+		</action>
+		<action name="cutkeywords" class="com.travel.action.lucene.CutKeyWordsAction">
+			<result name="success" type="json">
+				<param name="inputName">keywords</param>
+			</result>
+		</action>
+		<action name="suggestwordsdb" class="com.travel.action.lucene.SearchSuggestDB">
+			<result name="success" type="json">
+				<param name="inputName">suggestwords</param>
+			</result>
+		</action>
+	</package>
+	<include file="com/travel/struts/struts-admin.xml"></include>
+</struts>
