@@ -1,0 +1,1 @@
+$(function(){$("#list").sortable({delay:200,tolerance:"pointer",revert:true,containment:"parent",update:sortover,})});function sortover(){alert("sortover");var a=$("#list").find("div");for(var b=0;b<a.length;b++){alert(a[b].getAttribute("id")+b)}};

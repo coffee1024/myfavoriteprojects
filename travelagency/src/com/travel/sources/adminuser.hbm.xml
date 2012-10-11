@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" package="com.travel.entity">
+    <class name="AdminUser" table="adminuser">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="userName" type="java.lang.String">
+            <column name="user_name" not-null="true" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" not-null="true" />
+        </property>
+        <property name="phone" type="java.lang.String">
+            <column name="phone"  />
+        </property>
+        <property name="groupId" type="java.lang.Integer"  insert="false" update="false">
+            <column name="group_id" />
+        </property>
+        <property name="lastIP" type="java.lang.String">
+            <column name="last_ip" />
+        </property>
+        <property name="lastTime" type="java.sql.Timestamp">
+            <column name="last_time" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" />
+        </property>
+        <many-to-one name="adminGroup" class="AdminGroup" column="group_id" cascade="save-update,persist" lazy="false"></many-to-one>
+    </class>
+</hibernate-mapping>
