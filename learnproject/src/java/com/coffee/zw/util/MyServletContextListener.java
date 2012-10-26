@@ -15,7 +15,6 @@ public class MyServletContextListener implements ServletContextListener{
 	/**
 	 * 应用销毁时干什么事写这
 	 */
-	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 	}
@@ -23,7 +22,6 @@ public class MyServletContextListener implements ServletContextListener{
 	/**
 	 * 应用启动时，初始化配置表放入内存，修改定时任务时间设置
 	 */
-	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 		try{

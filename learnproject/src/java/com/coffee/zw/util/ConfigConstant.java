@@ -114,22 +114,22 @@ public class ConfigConstant {
 	 */
 	public static synchronized void reload() {
 		HashMap<String, String> temp = new HashMap<String, String>();
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
-			conn = com.coffee.zw.util.DbManager.getConnection(conn);
-			ps = conn.prepareStatement(Query_Sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				temp.put(rs.getString(1) + "--" + rs.getString(2), rs
-						.getString(3));
-			}
-		} catch (Exception e) {
-			logger.error("加载系统配置信息出现错误。", e);
-		} finally {
-			DbManager.closeDBResource(conn, ps, rs);
-		}
+//		Connection conn = null;
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		try {
+//			conn = com.coffee.zw.util.DbManager.getConnection(conn);
+//			ps = conn.prepareStatement(Query_Sql);
+//			rs = ps.executeQuery();
+//			while (rs.next()) {
+//				temp.put(rs.getString(1) + "--" + rs.getString(2), rs
+//						.getString(3));
+//			}
+//		} catch (Exception e) {
+//			logger.error("加载系统配置信息出现错误。", e);
+//		} finally {
+//			DbManager.closeDBResource(conn, ps, rs);
+//		}
 		map.clear();
 		map = temp;
 	}
