@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="learnproject"
+  id="myeclipse.1351251340596"
+  context-root="/learn"
+  j2ee-spec="5.0"
+  archive="learnproject.war">
+  <attributes>
+    <attribute name="webrootdir" value="webapp" />
+  </attributes>
+</project-module>
+

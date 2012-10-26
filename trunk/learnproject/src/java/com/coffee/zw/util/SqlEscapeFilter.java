@@ -19,7 +19,6 @@ public class SqlEscapeFilter implements Filter{
 	  {
 	    this.threadContextInheritable = threadContextInheritable;
 	  }
-	 @Override
 	  public void doFilter(ServletRequest request, ServletResponse response,
 				FilterChain chain) throws IOException, ServletException {
 //		 	System.out.println("过滤特殊字符开始");
@@ -35,7 +34,6 @@ public class SqlEscapeFilter implements Filter{
 	    }
 
 
-		@Override
 		public void init(FilterConfig arg0) throws ServletException {
 			System.out.println("初始化数据库过滤器");
 		}
