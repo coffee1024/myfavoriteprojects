@@ -36,8 +36,7 @@ public class FavoritesFolder  extends BaseBean{
 //	//重启tomcat后，如果使用默认的allocationSize，则为50，可能造成id不连续。需要则进行修改
 //	@SequenceGenerator(name = "SEQ_PICTURE", sequenceName = "SEQ_PICTURE", allocationSize = 1)
 	@Id
-	@GeneratedValue(generator = "paymentableGenerator",strategy = GenerationType.IDENTITY)  
-	@GenericGenerator(name = "paymentableGenerator", strategy = "identity")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Integer id;
 

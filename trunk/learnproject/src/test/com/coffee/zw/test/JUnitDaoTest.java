@@ -34,9 +34,11 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 	 */
 	@Test
 	public void test(){
-		FavoritesFolder ff=new FavoritesFolder();
-		ff.setFolderName("123");
-		ffd.save(ff);
+		FavoritesFolder  ff=new FavoritesFolder();
+		ff.setId(4);
+		ff.setFolderName("asdasda");
+		ffd.getSession().save(ff);
+		System.out.println("2");
 //		System.out.println(ffd.get(id));
 	}
 	
