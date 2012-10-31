@@ -7,7 +7,7 @@ import com.coffee.zw.core.orm.Page;
  * 
  * @author wanglei
  */
-public class TrsPage<T> extends Page<T> {
+public class BasePage<T> extends Page<T> {
 
 	/**
 	 * trs检索翻页优化用
@@ -34,7 +34,7 @@ public class TrsPage<T> extends Page<T> {
 	 */
 	private String searchExp = null;
 
-	public TrsPage(int pageSize) {
+	public BasePage(int pageSize) {
 		super(pageSize);
 	}
 

@@ -8,13 +8,13 @@ import java.util.Locale;
 
 import org.slf4j.*;
 
-import com.coffee.zw.domain.TrsBean;
+import com.coffee.zw.domain.BaseBean;
 
-public class TrsBean implements ITrsBean{
+public class BaseBean implements IBaseBean{
 
 	protected String recordId;
 
-	private static final Logger LOG = LoggerFactory.getLogger(TrsBean.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BaseBean.class);
 
 	public Field getField(Class<?> cls, String name) throws NoSuchFieldException {
 		if (cls == null) return null;

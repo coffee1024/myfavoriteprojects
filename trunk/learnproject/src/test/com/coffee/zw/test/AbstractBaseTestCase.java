@@ -27,7 +27,7 @@ public class AbstractBaseTestCase {
 		fscontext=new ClassPathXmlApplicationContext("/applicationContext.xml");
 		factory=(SessionFactory)fscontext.getBean("sessionFactory");
 		session=SessionFactoryUtils.getSession(factory, true);
-		session.setFlushMode(FlushMode.COMMIT);
+		session.setFlushMode(FlushMode.AUTO);
 		TransactionSynchronizationManager.bindResource(factory, new SessionHolder(session));
 		
 	}
