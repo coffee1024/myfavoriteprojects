@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.coffee.zw.dao.FavoritesFolderDao;
+import com.coffee.zw.domain.FavoritesFolder;
 
 /**
  *@author  liuguangqiang
@@ -33,7 +34,10 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 	 */
 	@Test
 	public void test(){
-		System.err.println(ffd.get(101L));
+		FavoritesFolder ff=new FavoritesFolder();
+		ff.setFolderName("123");
+		ffd.save(ff);
+//		System.out.println(ffd.get(id));
 	}
 	
 }

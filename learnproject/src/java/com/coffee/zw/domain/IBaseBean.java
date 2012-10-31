@@ -6,7 +6,7 @@ package com.coffee.zw.domain;
  * @author hua
  * 
  */
-public interface ITrsBean {
+public interface IBaseBean {
 	/**
 	 * 根据字段名以反射的方式设定域对象对应字段属性的值
 	 * 
