@@ -43,13 +43,6 @@
 		</repository>
 	</repositories>
   <dependencies>
-    <dependency>
-    	<groupId>org.hibernate</groupId>
-    	<artifactId>hibernate-search</artifactId>
-    	<version>4.1.1.Final</version>
-    	<type>pom</type>
-    	<scope>compile</scope>
-    </dependency>
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
@@ -84,6 +77,11 @@
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>4.2.0.Beta2</version>
 		</dependency>
   </dependencies>
   <build>
