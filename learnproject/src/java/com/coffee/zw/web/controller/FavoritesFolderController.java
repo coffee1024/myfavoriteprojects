@@ -43,9 +43,8 @@ public class FavoritesFolderController extends BaseController<FavoritesFolder, L
 			HttpServletResponse response) {
 		System.out.println("1");
 		FavoritesFolder  ff=new FavoritesFolder();
-		ff.setId(2);
-		ff.setFolderName("asdasda");
-		ffd.initEntity(ff);
+		ff.setContent("asdasda");
+		ffd.save(ff);
 		System.out.println("2");
 //		System.out.println(ffd.get(1L));
 //		Query query=ffd.getSession().createSQLQuery("select * from favoritesfolder").addEntity(FavoritesFolder.class);
