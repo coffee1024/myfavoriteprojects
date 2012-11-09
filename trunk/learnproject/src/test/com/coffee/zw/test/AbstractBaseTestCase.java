@@ -6,18 +6,18 @@ import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.orm.hibernate3.SessionHolder;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.orm.hibernate4.SessionHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 
 /**
- *@author  liuguangqiang
- *@date    2012-10-23 下午05:38:04
- *@version 1.0
+ * 测试基类，加载spring配置文件，获取session
+ *@Author        liuguangqiang
+ *@CreateTime    2012-10-23
+ *@Version       3.0
  **/
-public class AbstractBaseTestCase {
+public class AbstractBaseTestCase{
 	private SessionFactory factory;
 	private Session session;
 	protected ClassPathXmlApplicationContext  fscontext;
@@ -26,14 +26,15 @@ public class AbstractBaseTestCase {
 	public void openSession(){
 		fscontext=new ClassPathXmlApplicationContext("/applicationContext.xml");
 		factory=(SessionFactory)fscontext.getBean("sessionFactory");
-		session=SessionFactoryUtils.getSession(factory, true);
-		session.setFlushMode(FlushMode.AUTO);
+		session=SessionFactoryUtils.openSession(factory);
+		session.setFlushMode(FlushMode.COMMIT);
 		TransactionSynchronizationManager.bindResource(factory, new SessionHolder(session));
 		
 	}
 	@After
 	public void closeSession(){
 		TransactionSynchronizationManager.unbindResource(factory);
-		SessionFactoryUtils.releaseSession(session, factory);
+		SessionFactoryUtils.closeSession(session);
 	}
+	
 }

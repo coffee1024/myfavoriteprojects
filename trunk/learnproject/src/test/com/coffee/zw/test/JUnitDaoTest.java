@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.coffee.zw.dao.FavoritesFolderDao;
 import com.coffee.zw.domain.FavoritesFolder;
+import com.coffee.zw.service.FavoritesFolderManager;
 
 /**
  *@author  liuguangqiang
@@ -16,13 +17,13 @@ import com.coffee.zw.domain.FavoritesFolder;
  *@version 1.0
  **/
 public class JUnitDaoTest extends AbstractBaseTestCase {
-	FavoritesFolderDao ffd;
+	FavoritesFolderManager ffd;
 	/**
 	 * 使用spring的配置获取相关的类
 	 */
 	@Before
 	public void strat(){
-		ffd=fscontext.getBean(FavoritesFolderDao.class);
+		ffd=fscontext.getBean(FavoritesFolderManager.class);
 		System.out.println("start");
 	}
 	@After
@@ -35,10 +36,9 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 	@Test
 	public void test(){
 		FavoritesFolder  ff=new FavoritesFolder();
-		ff.setId(4);
-		ff.setFolderName("asdasda");
-		ffd.getSession().save(ff);
-		System.out.println("2");
+		ff.setContent("按时打算打算的");
+		ffd.save(ff);
+		System.out.println(ffd.get(3L).getContent());
 //		System.out.println(ffd.get(id));
 	}
 	

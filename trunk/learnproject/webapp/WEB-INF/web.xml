@@ -18,15 +18,15 @@
 <!--		<filter-name>requestFilter</filter-name>-->
 <!--		<url-pattern>/*</url-pattern>-->
 <!--	</filter-mapping>-->
-	<filter>
-<filter-name>MyFilter</filter-name>
-<filter-class>com.filter.MyFilter</filter-class>
-</filter>
+<!-- 	<filter> -->
+<!-- <filter-name>MyFilter</filter-name> -->
+<!-- <filter-class>com.filter.MyFilter</filter-class> -->
+<!-- </filter> -->
 
-	<filter-mapping>
-<filter-name>MyFilter</filter-name>
-<url-pattern>*.do</url-pattern>
-</filter-mapping>
+<!-- 	<filter-mapping> -->
+<!-- <filter-name>MyFilter</filter-name> -->
+<!-- <url-pattern>*.do</url-pattern> -->
+<!-- </filter-mapping> -->
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -49,7 +49,7 @@
 	<!-- Hibernate Open Session In View filter-->
 	<filter>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 	</filter>
 
 

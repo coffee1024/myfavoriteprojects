@@ -82,23 +82,15 @@
 	<!-- 项目属性 -->
 	<properties>
 		<!-- 主要依赖库的版本定义 hbt:3.5.1-Final 测试时有问题-->
-		<spring.version>3.0.5.RELEASE</spring.version>
-		<hibernate.version>3.3.2.GA</hibernate.version>
-		<hibernate.annotation.version>
-			3.4.0.GA
-		</hibernate.annotation.version>
-		<cxf.version>2.2.5</cxf.version>
-
+		<spring.version>3.1.3.RELEASE</spring.version>
+		<hibernate.version>4.1.8.FINAL</hibernate.version>
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<project.build.sourceEncoding>
-			UTF-8
-		</project.build.sourceEncoding>
-
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
-		<!-- spring begissssn -->
+		<!-- spring begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -114,13 +106,11 @@
 			<artifactId>spring-beans</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -142,7 +132,7 @@
 			<version>2.2</version>
 		</dependency>
 		<!-- spring end -->
-
+		
 		<!-- spring web begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -160,7 +150,16 @@
 			<version>2.3.16</version>
 		</dependency>
 		<!-- spring web end -->
-		<!-- orm begin -->
+		
+		<!-- spring orm begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring orm end -->
+		
+		<!-- hibernate begin -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -171,35 +170,46 @@
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernate.annotation.version}</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- orm end -->
-
-		<!-- spring orm begin -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
-		<!-- spring orm end -->
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>4.0.1.FINAL</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version> 
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version> 
+		</dependency>
+		<!-- hibernate end -->
+		
 		<!-- ehcache begin (usually for orm) -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-			<version>1.6.2</version>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.4.3</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-jgroupsreplication</artifactId>
-			<version>1.3</version>
+			<version>1.5</version>
 		</dependency>
 		<!-- ehcache end -->
-
+		
 		<!-- jdbc begin -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -217,25 +227,25 @@
 			<version>10.2.0.4</version>
 		</dependency>
 		<!-- jdbc end -->
-
+		
 		<!-- log begin  -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.5.11</version>
+			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.19</version>
+			<version>1.0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>0.9.19</version>
+			<version>1.0.7</version>
 		</dependency>
 		<!-- log end -->
-
+		
 		<!-- utils begin-->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -278,14 +288,14 @@
 			<version>1.0</version>
 		</dependency>
 		<!-- utils end-->
-
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- j2ee web spec begin -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -310,12 +320,6 @@
 			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- only for jdk5.0 -->
-		<!-- <dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>jsr250-api</artifactId>
-			<version>1.0</version>
-		</dependency> -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -325,7 +329,7 @@
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.11.0.GA</version>
+			<version>3.15.0.GA</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -338,47 +342,23 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    		<groupId>jboss</groupId>
+    		<artifactId>jboss-logging</artifactId>
+    		<version>3.1.1.GA</version>
+		</dependency>
+		<dependency>
+    		<groupId>javax.transaction</groupId>
+    		<artifactId>jta</artifactId>
+    		<version>1.1</version>
+		</dependency>
 		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.1.2</version>
 			</dependency> -->
 		<!-- j2ee web spec end-->
-
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-			<version>1.5.11</version>
-			</dependency>
-			<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl104-over-slf4j</artifactId>
-			<version>1.5.11</version>
-			</dependency>
-			<dependency>
-			<groupId>org.apache.openejb</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>5.0-1</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>1.2_04</version>
-			<scope>provided</scope>
-			</dependency> -->
-		<!-- <dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-			</dependency>
-			<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>1.2_04</version>
-			<scope>provided</scope>
-			</dependency> -->
+		
 		<!-- image process -->	
 		<dependency>
 			<groupId>com.drewnoakes</groupId>
@@ -441,6 +421,12 @@
 			<artifactId>quartz</artifactId>
 			<version>1.6.3</version>
 		</dependency>
+		<!-- trs javabean -->
+		<dependency>
+			<groupId>com.trs</groupId>
+			<artifactId>trsbean</artifactId>
+			<version>6.1.3300</version>
+		</dependency>
 		<!-- apache axis -->
 		<dependency>
 			<groupId>org.apache.axis</groupId>
@@ -473,14 +459,14 @@
 			<version>3.1</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-		</dependency>
-		<dependency>
 			<groupId>org.im4java</groupId>
 			<artifactId>im4java</artifactId>
 			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
 	</dependencies>
 </project>

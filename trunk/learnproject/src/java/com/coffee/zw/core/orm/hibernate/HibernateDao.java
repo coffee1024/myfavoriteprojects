@@ -21,7 +21,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.impl.CriteriaImpl;
+import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.Assert;
 
@@ -111,6 +111,36 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		if (page.isAutoCount()) {
 			long totalCount = countHqlResult(hql, values);
+			//long totalCount = countHqlResultDistinct(hql, values);
+			page.setItemTotal(totalCount);
+		}
+
+		setPageParameter(q, page);
+
+		List result = q.list();
+		page.setItems(result);
+		return page;
+	}
+	
+	
+	/**
+	 * 
+	 * @param page
+	 * @param hql
+	 * @param values
+	 * @return
+	 * @author liudawei
+	 * @date 2012-10-29
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<T> findPageDistinct(final Page<T> page, final String hql, final Map<String, ?> values) {
+		Assert.notNull(page, "page不能为空");
+
+		Query q = createQuery(hql, values);
+
+		if (page.isAutoCount()) {
+			//long totalCount = countHqlResult(hql, values);
+			long totalCount = countHqlResultDistinct(hql, values);
 			page.setItemTotal(totalCount);
 		}
 
@@ -214,6 +244,31 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		try {
 			Long count = findUnique(countHql, values);
+			return count;
+		} catch (Exception e) {
+			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
+		}
+	}
+	
+	/**
+	 * 去掉重复组图，使用范围有限，必须保证检索语句中组图的别名是 T3
+	 * @param hql
+	 * @param values
+	 * @return
+	 * @author liudawei
+	 * @date 2012-10-29
+	 */
+	protected long countHqlResultDistinct(final String hql, final Map<String, ?> values) {
+		String fromHql = hql;
+		// select子句与order by子句会影响count查询,进行简单的排除.
+		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
+		fromHql = StringUtils.substringBefore(fromHql, "order by");
+
+		
+		String countHql = "select count(distinct T3.id) " + fromHql;
+
+		try {
+			Long count = findDistinct(countHql, values);
 			return count;
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
