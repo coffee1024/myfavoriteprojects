@@ -1,0 +1,1 @@
+此为paoding分词用户自定义词典，如需使用请下载到本地后   配置paoding-dic-home.properties
