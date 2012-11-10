@@ -4,6 +4,7 @@
  */
 package com.coffee.core.orm.hibernate;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,14 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.highlight.Highlighter;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
+import org.apache.lucene.search.highlight.QueryScorer;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.util.Version;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -29,12 +35,12 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.internal.CriteriaImpl;
 import org.hibernate.search.FullTextQuery;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
 import com.coffee.core.orm.Page;
 import com.coffee.core.orm.PropertyFilter;
 import com.coffee.core.orm.PropertyFilter.MatchType;
-import com.coffee.domain.TestDomain;
 import com.coffee.util.ReflectionUtils;
 import com.google.common.collect.Lists;
 
@@ -145,7 +151,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return
 	 * @throws ParseException
 	 */
-	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze) throws ParseException{
+	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze,boolean highlighter) throws ParseException{
 		Assert.notEmpty(fields, "检索字段不能为空");
 		Assert.notEmpty(searchWords, "检索词不能为空");
 		if (fields.length!=searchWords.length) {
@@ -153,7 +159,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		}
 		logger.debug("开始分页查询");
 		org.apache.lucene.search.Query q=MultiFieldQueryParser.parse(lucenVersion,searchWords , fields,flags, analyze);
-		FullTextQuery query=getFullTextSession().createFullTextQuery(q);
+		FullTextQuery query=getFullTextSession().createFullTextQuery(q,entityClass);
 		logger.debug("全文检索参数为"+query.getQueryString());
 		if (page.isAutoCount()) {
 			long totalCount = query.getResultSize();
@@ -161,10 +167,50 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		}
 		setPageParameter(query, page);
 		List<T> list=query.list();
+		if (highlighter) {
+			list=hightLight(q,list, lucenVersion, null, analyze, fields);
+		}
 		page.setItems(list);
 		return page;
 	}
 	
+	
+		/**
+	 	 * @param org.apache.lucene.search.Query luceneQuery
+	     * @param searchResults 搜索结果集
+	     * @param excludeFields 要排除高亮的字段
+	     * @param fieldNames 需要高亮的字段
+	     * @return 高亮后的searchResults
+	     */
+	private  List<T> hightLight(org.apache.lucene.search.Query luceneQuery, List<T> searchResults,Version lucenVersion, List<String> excludeFields,Analyzer analyzer, String[] fieldNames) {
+	        // 设置高亮
+	        SimpleHTMLFormatter formatter = new SimpleHTMLFormatter("<font color=\"red\">", "</font>");
+	        QueryScorer queryScorer = new QueryScorer(luceneQuery);
+	        Highlighter highlighter = new Highlighter(formatter, queryScorer);
+	        for (T e : searchResults) {
+	            for (String fieldName : fieldNames) {
+	                if(null != excludeFields && excludeFields.contains(fieldName)){
+	                    continue;
+	                }
+	                //ReflectionUtils.getField(ReflectionUtils.findField(searchResultClass, fieldName), e);
+	                Object fieldValue = org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getReadMethod(), e); 
+	                String hightLightFieldValue = null;
+	                if(fieldValue instanceof String){
+	                    try {
+	                        hightLightFieldValue = highlighter.getBestFragment( analyzer, fieldName , org.apache.commons.lang.ObjectUtils.toString(fieldValue, null));
+	                    } catch (IOException e1) {
+	                        e1.printStackTrace();
+	                    } catch (InvalidTokenOffsetsException e1) {
+	                        e1.printStackTrace();
+	                    }
+	                    //setField(ReflectionUtils.findField(searchResultClass, fieldName), e, hightLightFieldValue);
+	                    org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getWriteMethod(), e, hightLightFieldValue); 
+	                }
+	            }
+	        }
+	        return searchResults;
+	    }
+
 	/**
 	 * 
 	 * @param page
