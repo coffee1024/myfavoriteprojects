@@ -15,7 +15,6 @@ import com.google.common.collect.Lists;
  * 
  * @param <T>
  *            Page中记录的类型.
- * @author calvin
  */
 public class Page<T>
 {

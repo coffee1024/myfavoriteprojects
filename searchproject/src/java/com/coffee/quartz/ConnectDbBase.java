@@ -30,7 +30,6 @@ public class ConnectDbBase {
 	
 	/**
 	 * 连接数据库
-	 * @author PuTao
 	 * @date 2010-8-16
 	 * @return
 	 */
@@ -53,7 +52,6 @@ public class ConnectDbBase {
 	
 	/**
 	 * 关闭数据库连接
-	 * @author PuTao
 	 * @date 2010-8-16
 	 * @param rst
 	 * @param conn

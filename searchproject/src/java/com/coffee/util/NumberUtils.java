@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 
 /**
  * @Title 数字相关常用操作类
- * @Author ZhouQiang
- * @CrTime 2010-4-16 下午01:06:38
  * @Version 1.0
  */
 public class NumberUtils {
@@ -75,7 +73,6 @@ public class NumberUtils {
 	
 	/**
 	 * 正在表达式判断字符串是否是整数
-	 * @author PuTao
 	 * @date 2011-1-13
 	 */
 	public static Boolean isNumeric(String str){

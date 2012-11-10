@@ -13,7 +13,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Oracle数据库检索条件工具类
  * 
- * @author Stone.W
  * 
  */
 public class AdvSearchWordGeneratorForOracle {

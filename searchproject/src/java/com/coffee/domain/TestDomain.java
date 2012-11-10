@@ -36,7 +36,6 @@ public class TestDomain implements Serializable{
 	
 	/**
 	 * lucene检索时方便传递检索字段
-	 * @author liuguangqiang
 	 *
 	 */
 	public enum Fields{

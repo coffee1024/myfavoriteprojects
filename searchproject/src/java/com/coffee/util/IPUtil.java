@@ -2,7 +2,6 @@ package com.coffee.util;
 
 /**
  * @Title IP常用类
- * @Author ZhouQiang
  * @CrTime 2010-4-15 下午09:39:49
  * @Version 1.0
  */

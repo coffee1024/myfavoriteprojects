@@ -8,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * TRSServer数据库检索条件工具类(负责生成待编库、资料库、成品库、统计库中相关检索条件)
  * 
- * @author Stone.W
  * 
  */
 public class SearchWordGeneratorForTrs {

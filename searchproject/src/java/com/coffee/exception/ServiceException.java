@@ -5,7 +5,6 @@ package com.coffee.exception;
  * 
  * 继承自RuntimeException,在函数中抛出会触发Spring的事务管理器引起事务回退.
  * 
- * @author calvin
  */
 public class ServiceException extends RuntimeException {
 

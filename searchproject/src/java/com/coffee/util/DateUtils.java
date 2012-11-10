@@ -7,7 +7,6 @@ import java.util.Date;
 
 /**
  * @Title 时间处理常用操作类
- * @Author ZhouQiang
  * @CrTime 2010-4-15 下午09:39:49
  * @Version 1.0
  */

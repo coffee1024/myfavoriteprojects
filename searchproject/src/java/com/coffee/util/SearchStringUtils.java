@@ -6,7 +6,6 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * 对TRS检索中特殊字符转义
- * @author wanglei
  *
  */
 public class SearchStringUtils {

@@ -3,7 +3,6 @@ package com.coffee.domain;
 /**
  * 系统所有的实体类需实现这个接口
  * 
- * @author hua
  * 
  */
 public interface IBaseBean {

@@ -2,7 +2,6 @@ package com.coffee.util;
 
 /**
  * @title js端使用escape转码后服务器端的编解码方法
- * @author LiangJC
  * @crTime 2010-7-7
  */
 public class ModifyCode {

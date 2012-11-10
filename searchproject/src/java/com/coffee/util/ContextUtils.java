@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Title Cookie/Session常用类
- * @Author ZhouQiang
  * @CrTime 2010-6-29 下午05:55:37
  * @Version 1.0
  */

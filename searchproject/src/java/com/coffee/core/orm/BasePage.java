@@ -5,7 +5,6 @@ import com.coffee.core.orm.Page;
 /**
  * trs检索结果
  * 
- * @author wanglei
  */
 public class BasePage<T> extends Page<T> {
 
