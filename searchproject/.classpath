@@ -9,5 +9,9 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/paoding.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_lucene_40_plug.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_seg.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_lucene_32_plug.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/tree-split-word.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
