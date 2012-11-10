@@ -15,7 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.coffee.dao.FavoritesFolderDao;
-import com.coffee.domain.FavoritesFolder;
+import com.coffee.domain.TestDomain;
 import com.coffee.util.ContextUtils;
 
 
@@ -28,7 +28,7 @@ import com.coffee.util.ContextUtils;
 // 标注业务层组件
 @Controller
 @RequestMapping("/favorite.do")
-public class FavoritesFolderController extends BaseController<FavoritesFolder, Long> {
+public class FavoritesFolderController extends BaseController<TestDomain, Long> {
 	
 	@Autowired
 	FavoritesFolderDao ffd;
@@ -42,7 +42,7 @@ public class FavoritesFolderController extends BaseController<FavoritesFolder, L
 	public String getIndexInfo(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println("1");
-		FavoritesFolder  ff=new FavoritesFolder();
+		TestDomain  ff=new TestDomain();
 		ff.setContent("asdasda");
 		ffd.save(ff);
 		System.out.println("2");

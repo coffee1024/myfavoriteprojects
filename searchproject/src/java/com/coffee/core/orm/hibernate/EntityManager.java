@@ -3,6 +3,10 @@ package com.coffee.core.orm.hibernate;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +54,15 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	public Page<T> search(final Page<T> page, final List<PropertyFilter> filters) {
 		return getEntityDao().findPage(page, filters);
 	}
-
+	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze){
+		try {
+			return getEntityDao().fullTextPageQuary(page, fields, searchWords,flags, lucenVersion, analyze);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			logger.error("分页全文检索出错");
+			return page;
+		}
+	}
 	//@Transactional
 	public void save(final T entity) {
 		getEntityDao().save(entity);

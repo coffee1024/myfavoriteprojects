@@ -10,18 +10,18 @@ import org.hibernate.search.FullTextQuery;
 import org.springframework.stereotype.Repository;
 
 import com.coffee.core.orm.hibernate.HibernateDao;
-import com.coffee.domain.FavoritesFolder;
+import com.coffee.domain.TestDomain;
 
 /**
  */
 @Repository
-public class FavoritesFolderDao extends HibernateDao<FavoritesFolder, Long> {
+public class FavoritesFolderDao extends HibernateDao<TestDomain, Long> {
 	
-	public List<FavoritesFolder> fullTextQuary(String content) throws ParseException{
+	public List<TestDomain> fullTextQuary(String content) throws ParseException{
 		QueryParser parser =  new  QueryParser(Version.LUCENE_36, "content", new AnsjAnalysis()); 
-		FullTextQuery query=getFullTextSession().createFullTextQuery(parser.parse(content), FavoritesFolder.class);
+		FullTextQuery query=getFullTextSession().createFullTextQuery(parser.parse(content), TestDomain.class);
 		
-		List<FavoritesFolder> list=query.list();
+		List<TestDomain> list=query.list();
 		return list;
 	}
 	
