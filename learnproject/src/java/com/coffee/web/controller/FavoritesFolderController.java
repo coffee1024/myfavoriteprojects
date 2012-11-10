@@ -21,7 +21,6 @@ import com.coffee.util.ContextUtils;
 
 /**
  * @Title 控制类
- * @Author liuguangqiang
  * @CrTime 2012-8-3 上午10:10:47
  * @Version 1.0
  */

@@ -2,7 +2,6 @@ package com.coffee.web.controller.util;
 
 /**
  * @title 提供操作与前台页面交互的信息的方法
- * @author LiangJC
  * @crTime 2010-4-28
  */
 public class Communication {

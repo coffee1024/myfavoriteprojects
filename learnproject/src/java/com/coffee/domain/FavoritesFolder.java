@@ -20,7 +20,6 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 /**
  * @Title 收藏夹实体类
  * 
- * @Author dulei
  * @CreateTime 2012-11-7
  * @Version 3.0
  */

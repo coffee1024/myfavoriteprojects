@@ -27,7 +27,6 @@ import com.google.common.collect.Lists;
 /**
  * Hibernate针对Web应用的工具类.
  * 
- * @author calvin
  */
 public class HibernateWebUtils {
 

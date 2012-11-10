@@ -10,7 +10,6 @@ import com.coffee.core.orm.Page;
 
 /**
  * @Title 基本分页对象控制类
- * @Author ZhouQiang
  * @CrTime 2010-4-19 上午09:51:10
  * @Version 1.0
  */

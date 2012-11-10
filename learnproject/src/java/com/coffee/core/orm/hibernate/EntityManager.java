@@ -17,7 +17,6 @@ import com.coffee.core.orm.PropertyFilter;
  *            领域对象类型
  * @param <PK>
  *            领域对象的主键类型 eg. public class UserManager extends EntityManager<User, Long>{ }
- * @author calvin
  */
 @Transactional
 public abstract class EntityManager<T, PK extends Serializable> {
