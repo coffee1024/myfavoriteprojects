@@ -19,7 +19,6 @@ import com.coffee.util.ReflectionUtils;
  * 
  * PropertyFilter主要记录页面中简单的搜索过滤条件,比Hibernate的Criterion要简单.
  * 
- * @author calvin
  */
 public class PropertyFilter {
 

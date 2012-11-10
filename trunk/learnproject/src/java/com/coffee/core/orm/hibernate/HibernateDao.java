@@ -38,7 +38,6 @@ import com.google.common.collect.Lists;
  *            DAO操作的对象类型
  * @param <PK>
  *            主键类型
- * @author calvin
  */
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
@@ -129,7 +128,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param hql
 	 * @param values
 	 * @return
-	 * @author liudawei
 	 * @date 2012-10-29
 	 */
 	@SuppressWarnings("unchecked")
@@ -255,7 +253,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param hql
 	 * @param values
 	 * @return
-	 * @author liudawei
 	 * @date 2012-10-29
 	 */
 	protected long countHqlResultDistinct(final String hql, final Map<String, ?> values) {

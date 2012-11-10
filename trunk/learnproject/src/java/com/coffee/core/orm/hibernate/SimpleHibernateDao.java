@@ -34,7 +34,6 @@ import com.coffee.util.ReflectionUtils;
  *            DAO操作的对象类型
  * @param <PK>
  *            主键类型
- * @author calvin
  */
 @SuppressWarnings("unchecked")
 public class SimpleHibernateDao<T, PK extends Serializable> {
@@ -222,7 +221,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param hql
 	 * @param values
 	 * @return
-	 * @author liudawei
 	 * @date 2012-10-29
 	 */
 	public <X> X findDistinct(final String hql, final Map<String, ?> values) {

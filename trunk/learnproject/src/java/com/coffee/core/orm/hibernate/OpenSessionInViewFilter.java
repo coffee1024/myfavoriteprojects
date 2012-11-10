@@ -1,7 +1,6 @@
 package com.coffee.core.orm.hibernate;
 /**
  * @Title 
- * @Author ZhouQiang
  * @CrTime 2010-4-9 上午11:17:10
  * @Version 1.0
  */
@@ -35,7 +34,6 @@ import org.apache.commons.lang.StringUtils;
         </init-param>    
     </filter>
  *  
- * @author calvin 
  */ 
 public class OpenSessionInViewFilter extends org.springframework.orm.hibernate4.support.OpenSessionInViewFilter { 
  

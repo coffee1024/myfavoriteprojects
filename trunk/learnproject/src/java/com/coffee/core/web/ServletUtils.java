@@ -25,7 +25,6 @@ import com.google.common.collect.Maps;
 /**
  * Http与Servlet工具类.
  * 
- * @author calvin
  */
 public class ServletUtils {
 
