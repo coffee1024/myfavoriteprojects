@@ -15,7 +15,7 @@ import com.coffee.domain.TestDomain;
 /**
  */
 @Repository
-public class FavoritesFolderDao extends HibernateDao<TestDomain, Long> {
+public class TestDomainDao extends HibernateDao<TestDomain, Long> {
 	
 	public List<TestDomain> fullTextQuary(String content) throws ParseException{
 		QueryParser parser =  new  QueryParser(Version.LUCENE_36, "content", new AnsjAnalysis()); 

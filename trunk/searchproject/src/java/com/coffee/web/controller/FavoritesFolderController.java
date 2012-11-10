@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.coffee.dao.FavoritesFolderDao;
+import com.coffee.dao.TestDomainDao;
 import com.coffee.domain.TestDomain;
 import com.coffee.util.ContextUtils;
 
@@ -31,7 +31,7 @@ import com.coffee.util.ContextUtils;
 public class FavoritesFolderController extends BaseController<TestDomain, Long> {
 	
 	@Autowired
-	FavoritesFolderDao ffd;
+	TestDomainDao ffd;
 	
 	/**
 	 * 分页获取本收藏夹下所有的图片，

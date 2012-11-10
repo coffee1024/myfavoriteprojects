@@ -54,9 +54,21 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	public Page<T> search(final Page<T> page, final List<PropertyFilter> filters) {
 		return getEntityDao().findPage(page, filters);
 	}
-	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze){
+	
+	/**
+	 * 
+	 * @param page
+	 * @param fields
+	 * @param searchWords
+	 * @param flags
+	 * @param lucenVersion
+	 * @param analyze
+	 * @param highlighter
+	 * @return
+	 */
+	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze,boolean highlighter){
 		try {
-			return getEntityDao().fullTextPageQuary(page, fields, searchWords,flags, lucenVersion, analyze);
+			return getEntityDao().fullTextPageQuary(page, fields, searchWords,flags, lucenVersion, analyze,highlighter);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			logger.error("分页全文检索出错");
