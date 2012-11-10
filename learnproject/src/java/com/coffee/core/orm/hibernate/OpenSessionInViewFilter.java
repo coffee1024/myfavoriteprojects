@@ -37,7 +37,7 @@ import org.apache.commons.lang.StringUtils;
  *  
  * @author calvin 
  */ 
-public class OpenSessionInViewFilter extends org.springframework.orm.hibernate3.support.OpenSessionInViewFilter { 
+public class OpenSessionInViewFilter extends org.springframework.orm.hibernate4.support.OpenSessionInViewFilter { 
  
         public static final String EXCLUDE_SUFFIXS_NAME = "excludeSuffixs"; 
  
