@@ -345,7 +345,7 @@
 		<dependency>
     		<groupId>jboss</groupId>
     		<artifactId>jboss-logging</artifactId>
-    		<version>3.1.1.GA</version>
+    		<version>3.1.2.GA</version>
 		</dependency>
 		<dependency>
     		<groupId>javax.transaction</groupId>
@@ -420,12 +420,6 @@
 			<groupId>opensymphony</groupId>
 			<artifactId>quartz</artifactId>
 			<version>1.6.3</version>
-		</dependency>
-		<!-- trs javabean -->
-		<dependency>
-			<groupId>com.trs</groupId>
-			<artifactId>trsbean</artifactId>
-			<version>6.1.3300</version>
 		</dependency>
 		<!-- apache axis -->
 		<dependency>
