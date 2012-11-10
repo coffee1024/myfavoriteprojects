@@ -21,7 +21,6 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 /**
  * @Title 系统配置常量
- * @Author ZhouQiang
  * @CrTime 2010-5-20 上午09:37:51
  * @Version 1.0
  */

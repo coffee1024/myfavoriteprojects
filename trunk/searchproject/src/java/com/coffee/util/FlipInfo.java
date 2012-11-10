@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * @Title 分页管理类
- * @Author ZhouQiang
  * @CrTime 2010-4-12 上午11:14:10
  * @Version 1.0
  */

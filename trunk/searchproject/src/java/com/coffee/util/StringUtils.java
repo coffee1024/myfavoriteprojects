@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Title 字符串常用操作类
- * @Author ZhouQiang
  * @CreateTime 2010-3-31 下午04:48:35
  * @Version 1.0
  */

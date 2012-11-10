@@ -7,7 +7,6 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * 加密解密类（固定算法和密钥）
  * 
- * @author ZhouQiang
  * @version 创建时间：2009-8-12 上午10:30:24
  */
 public class EncrytUnEncrypt {

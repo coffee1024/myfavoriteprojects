@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
  * @Title 提供对单个文件与目录的压缩，并支持是否需要创建压缩源目录、中文路径
- * @Author ZhouQiang
  * @CrTime 2010-5-26 上午11:41:11
  * @Version 1.0
  */

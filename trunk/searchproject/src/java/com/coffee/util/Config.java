@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @Title 图片文件常用参数及变量
- * @Author ZhouQiang
  * @CrTime 2010-4-13 下午04:47:02
  * @Version 1.5
  */

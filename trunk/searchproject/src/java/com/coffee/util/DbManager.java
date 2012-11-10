@@ -12,7 +12,6 @@ import java.util.Properties;
 
 /**
  * @Title 数据库管理
- * @Author ZhouQiang
  * @CrTime 2010-5-20 上午11:01:21
  * @Version 1.0
  */
@@ -55,7 +54,6 @@ public class DbManager {
 	
 	/**
 	 * 按配置表数据连接数据库
-	 * @author PuTao
 	 * @throws IOException 
 	 * @date 2010-8-31
 	 */

@@ -34,7 +34,6 @@ import jcifs.smb.SmbFileInputStream;
 
 /**
  * @Title 文件常用操作类
- * @Author ZhouQiang
  * @CrTime 2010-4-15 下午09:39:38
  * @Version 1.0
  */
@@ -639,7 +638,6 @@ public class FileUtils {
 	 * 删除目录下子目录和文件（按文件最后修改时间）
 	 * path：文件路径
 	 * sumDay：需要删除几天前的文件（最后修改时间），如1，则表示删除一天前的
-	 * @author PuTao
 	 * @date 2011-4-11
 	 */
 	public static void deleteDirsByDate(String path,String sumDay){

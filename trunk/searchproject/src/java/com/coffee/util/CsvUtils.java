@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * 本类提供关于CSV文件的方法
  * 
- * @author shan.hongjie
  * 
  */
 public class CsvUtils {

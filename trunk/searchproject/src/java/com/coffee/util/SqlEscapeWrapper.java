@@ -1,6 +1,5 @@
 package com.coffee.util;
 /**
- *@author  刘光强
  *@date    2012-4-20 下午3:19:16
  *@version 1.0
  **/

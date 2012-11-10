@@ -7,7 +7,6 @@ import org.apache.commons.collections.iterators.ArrayListIterator;
 
 /**
  * @Title 图片状态枚举变量
- * @Author ZhouQiang
  * @CrTime 2010-4-14 上午10:32:53
  * @Version 1.0
  */
@@ -41,7 +40,6 @@ public class PicStateConstants {
 
 	/**
 	 * @title 保存栏目状态,不值当多写出一个类,权且安居于此
-	 * @author LiangJC
 	 * @crTime 2010-4-29
 	 */
 	public enum PublishChannelState {
@@ -68,7 +66,6 @@ public class PicStateConstants {
 
 	/**
 	 * @title 发布库图片状态--0待编;1编辑;2送审;10已审;
-	 * @author LiangJC
 	 * @crTime 2010-4-23
 	 */
 	public enum PublishPictureState {
