@@ -21,7 +21,7 @@ import org.springframework.ui.ModelMap;
 import com.coffee.core.orm.Page;
 import com.coffee.core.orm.hibernate.EntityManager;
 import com.coffee.dao.FavoritesFolderDao;
-import com.coffee.domain.FavoritesFolder;
+import com.coffee.domain.TestDomain;
 import com.coffee.util.ConfigConstant;
 import com.coffee.util.ContextUtils;
 import com.coffee.util.StringUtils;
@@ -35,7 +35,7 @@ import com.coffee.util.StringUtils;
  */
 @Service
 @Transactional
-public class FavoritesFolderManager extends EntityManager<FavoritesFolder, Long> {
+public class FavoritesFolderManager extends EntityManager<TestDomain, Long> {
 
 	@Autowired
 	private FavoritesFolderDao ffd;
@@ -44,7 +44,7 @@ public class FavoritesFolderManager extends EntityManager<FavoritesFolder, Long>
 	protected FavoritesFolderDao getEntityDao() {
 		return ffd;
 	}
-	public List<FavoritesFolder> fullTextQuary(String content){
+	public List<TestDomain> fullTextQuary(String content){
 		try {
 			return ffd.fullTextQuary(content);
 		} catch (ParseException e) {
@@ -53,4 +53,5 @@ public class FavoritesFolderManager extends EntityManager<FavoritesFolder, Long>
 			return null;
 		}
 	}
+	
 }

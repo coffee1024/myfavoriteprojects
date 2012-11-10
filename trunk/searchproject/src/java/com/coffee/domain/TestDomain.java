@@ -37,10 +37,37 @@ import org.hibernate.search.annotations.Store;
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @Table(name = "TEST")
-public class FavoritesFolder implements Serializable{
+public class TestDomain implements Serializable{
 	
 	private static final long serialVersionUID = -4283203759378469944L;
+	
+	/**
+	 * lucene检索时方便传递检索字段
+	 * @author liuguangqiang
+	 *
+	 */
+	public enum Fields{
+		/**
+		 * id
+		 */
+		id("id"),
+		
+		/**
+		 * 正文
+		 */
+		content("content");
+		
+		private String field="id";
 
+		public String getValue() {
+			return field;
+		}
+
+		private  Fields(String field) {
+			this.field = field;
+		}
+	}
+	
 	@Id
 //	@GeneratedValue(generator = "paymentableGenerator")  
 //	@GenericGenerator(name = "paymentableGenerator", strategy = "sequence",parameters = { @Parameter(name = "sequence", value = "SEQ_TEST") })
@@ -49,6 +76,7 @@ public class FavoritesFolder implements Serializable{
 	@Column(name = "ID")
 	@DocumentId
 	private Long id;
+	
 	@Field(name="content",store= Store.YES,index =Index.YES,analyze=Analyze.YES,analyzer=@Analyzer(impl = AnsjAnalysis.class ))
 	@Column(name="CONTENT")
 	private String content;

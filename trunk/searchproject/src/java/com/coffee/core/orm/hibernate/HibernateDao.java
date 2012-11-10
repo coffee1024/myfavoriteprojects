@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.queryParser.MultiFieldQueryParser;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.util.Version;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -22,12 +27,14 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.internal.CriteriaImpl;
+import org.hibernate.search.FullTextQuery;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.Assert;
 
 import com.coffee.core.orm.Page;
 import com.coffee.core.orm.PropertyFilter;
 import com.coffee.core.orm.PropertyFilter.MatchType;
+import com.coffee.domain.TestDomain;
 import com.coffee.util.ReflectionUtils;
 import com.google.common.collect.Lists;
 
@@ -121,7 +128,42 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		page.setItems(result);
 		return page;
 	}
-	
+	/**
+	 * 
+	 * @param page
+	 * 			分页对象
+	 * @param fields
+	 * 			检索的lucene索引字段名
+	 * @param searchWords
+	 * 			检索词
+	 * 
+	 * 
+	 * @param lucenVersion
+	 * 			lucene版本
+	 * @param analyze
+	 * 			使用的分词器
+	 * @return
+	 * @throws ParseException
+	 */
+	public Page<T> fullTextPageQuary(Page<T> page,String[] fields,String[] searchWords,BooleanClause.Occur[] flags,Version lucenVersion,Analyzer analyze) throws ParseException{
+		Assert.notEmpty(fields, "检索字段不能为空");
+		Assert.notEmpty(searchWords, "检索词不能为空");
+		if (fields.length!=searchWords.length) {
+			Assert.isTrue(true,"检索字段与检索词个数不匹配");
+		}
+		logger.debug("开始分页查询");
+		org.apache.lucene.search.Query q=MultiFieldQueryParser.parse(lucenVersion,searchWords , fields,flags, analyze);
+		FullTextQuery query=getFullTextSession().createFullTextQuery(q);
+		logger.debug("全文检索参数为"+query.getQueryString());
+		if (page.isAutoCount()) {
+			long totalCount = query.getResultSize();
+			page.setItemTotal(totalCount);
+		}
+		setPageParameter(query, page);
+		List<T> list=query.list();
+		page.setItems(list);
+		return page;
+	}
 	
 	/**
 	 * 

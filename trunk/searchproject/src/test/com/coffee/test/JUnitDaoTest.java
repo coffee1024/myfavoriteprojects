@@ -2,13 +2,17 @@ package com.coffee.test;
 
 import java.util.List;
 
+import org.ansj.lucene3.AnsjAnalysis;
 import org.apache.commons.lang.StringUtils;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.util.Version;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.coffee.core.orm.Page;
 import com.coffee.dao.FavoritesFolderDao;
-import com.coffee.domain.FavoritesFolder;
+import com.coffee.domain.TestDomain;
 import com.coffee.service.FavoritesFolderManager;
 
 /**
@@ -36,9 +40,11 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 	@Test
 	public void test(){
 //		FavoritesFolder  ff=new FavoritesFolder();
-//		ff.setContent("按时打算打算的");
+//		ff.setContent("中华人民共和国你好大中国北京南京");
 //		ffd.saveFullText(ff);
-		System.out.println(ffd.fullTextQuary("打算"));
+		BooleanClause.Occur[] flags=new BooleanClause.Occur[]{BooleanClause.Occur.SHOULD};
+		System.out.println(ffd.fullTextQuary("中华人民共和国"));
+		System.out.println(ffd.fullTextPageQuary(new Page<TestDomain>(2), new String[]{"content"}, new String[]{"中华人民共和国"},flags, Version.LUCENE_36, new AnsjAnalysis()).getItems());
 	}
 	
 }
