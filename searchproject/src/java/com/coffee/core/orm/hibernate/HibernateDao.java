@@ -187,13 +187,18 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	        SimpleHTMLFormatter formatter = new SimpleHTMLFormatter("<font color=\"red\">", "</font>");
 	        QueryScorer queryScorer = new QueryScorer(luceneQuery);
 	        Highlighter highlighter = new Highlighter(formatter, queryScorer);
+	        List<T> results=new ArrayList<T>();
 	        for (T e : searchResults) {
+	        	//事务未关闭前对原来对象操作会导致更新数据库，所以复制对象进行加亮操作
+	        	T tmp=(T)BeanUtils.instantiateClass(ReflectionUtils.getSuperClassGenricType(getClass()));
+	        	BeanUtils.copyProperties(e, tmp);
 	            for (String fieldName : fieldNames) {
 	                if(null != excludeFields && excludeFields.contains(fieldName)){
+	                	results.add(tmp);
 	                    continue;
 	                }
 	                //ReflectionUtils.getField(ReflectionUtils.findField(searchResultClass, fieldName), e);
-	                Object fieldValue = org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getReadMethod(), e); 
+	                Object fieldValue = org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getReadMethod(),tmp); 
 	                String hightLightFieldValue = null;
 	                if(fieldValue instanceof String){
 	                    try {
@@ -204,11 +209,12 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	                        e1.printStackTrace();
 	                    }
 	                    //setField(ReflectionUtils.findField(searchResultClass, fieldName), e, hightLightFieldValue);
-	                    org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getWriteMethod(), e, hightLightFieldValue); 
+	                    org.springframework.util.ReflectionUtils.invokeMethod(BeanUtils.getPropertyDescriptor(entityClass, fieldName).getWriteMethod(),tmp, hightLightFieldValue); 
 	                }
 	            }
+	            results.add(tmp);
 	        }
-	        return searchResults;
+	        return results;
 	    }
 
 	/**
