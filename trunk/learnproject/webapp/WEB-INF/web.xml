@@ -34,7 +34,7 @@
 	</context-param>
 		<filter>
 			<filter-name>SqlEscapeFilter</filter-name>
-			<filter-class>com.coffee.zw.util.SqlEscapeFilter</filter-class>
+			<filter-class>com.coffee.util.SqlEscapeFilter</filter-class>
 		</filter>
 
 		<filter-mapping>
@@ -88,12 +88,12 @@
 
 	<!-- Session监听器，用来在ajax中获取session -->
 	<listener>
-		<listener-class>com.coffee.zw.util.SessionListener</listener-class>
+		<listener-class>com.coffee.util.SessionListener</listener-class>
 	</listener>
 
 	<!-- 应用启动时加载配置表和应该定时任务时间规则 -->
 	<listener>
-		<listener-class>com.coffee.zw.util.MyServletContextListener</listener-class>
+		<listener-class>com.coffee.util.MyServletContextListener</listener-class>
 	</listener>
 
 	<servlet>

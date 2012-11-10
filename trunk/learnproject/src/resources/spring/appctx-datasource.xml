@@ -51,7 +51,7 @@
 			</props>
 		</property>
 		
-		<property name="packagesToScan" value="com.coffee.zw.domain" />
+		<property name="packagesToScan" value="com.coffee.domain" />
 	</bean>
 
 	<!-- 事务管理器配置,单数据源事务 -->
