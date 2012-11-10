@@ -7,9 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.coffee.zw.dao.FavoritesFolderDao;
-import com.coffee.zw.domain.FavoritesFolder;
-import com.coffee.zw.service.FavoritesFolderManager;
+import com.coffee.dao.FavoritesFolderDao;
+import com.coffee.domain.FavoritesFolder;
+import com.coffee.service.FavoritesFolderManager;
 
 /**
  *@author  liuguangqiang
