@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -33,8 +34,10 @@ public class FavoritesFolder implements Serializable{
 	private static final long serialVersionUID = -4283203759378469944L;
 
 	@Id
-	@GeneratedValue(generator = "paymentableGenerator")  
-	@GenericGenerator(name = "paymentableGenerator", strategy = "sequence",parameters = { @Parameter(name = "sequence", value = "SEQ_TEST") })
+//	@GeneratedValue(generator = "paymentableGenerator")  
+//	@GenericGenerator(name = "paymentableGenerator", strategy = "sequence",parameters = { @Parameter(name = "sequence", value = "SEQ_TEST") })
+	@GeneratedValue(generator = "paymentableGenerator")     
+	@GenericGenerator(name = "paymentableGenerator", strategy = "native")   
 	@Column(name = "ID")
 	private Long id;
 	
