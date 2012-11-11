@@ -39,12 +39,12 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 	 */
 	@Test
 	public void test(){
-//		for(int i=1;i<10;i++){
-//			TestDomain  ff=new TestDomain();
-//			ff.setContent("中华人民共和国你好大中国北京南京"+i);
-//			ffd.saveFullText(ff);
-//		}
-//		System.out.println(ffd.fullTextQuary("中华人民共和国"));
+		for(int i=1;i<10;i++){
+			TestDomain  ff=new TestDomain();
+			ff.setContent("中华人民共和国你好大中国北京南京"+i);
+			ffd.saveFullText(ff);
+		}
+		System.out.println(ffd.fullTextQuary("中华人民共和国"));
 		BooleanClause.Occur[] flags=new BooleanClause.Occur[]{BooleanClause.Occur.SHOULD};
 		Page<TestDomain> page=new Page<TestDomain>(3);
 		page.setPageNo(2);
