@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="webapp/WEB-INF/classes" path="src/java"/>
+	<classpathentry kind="src" path="src/resources"/>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/liuguangqiang/.m2/repository/org/ow2/easybeans/quartz/1.6.1/quartz-1.6.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/paoding.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_lucene_40_plug.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_seg.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ansj_lucene_32_plug.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/tree-split-word.jar"/>
+	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
+</classpath>
