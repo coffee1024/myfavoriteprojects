@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="shoppingguide"
+  id="myeclipse.1351251340596"
+  context-root="/sg"
+  j2ee-spec="5.0"
+  archive="shoppingguide.war">
+  <attributes>
+    <attribute name="webrootdir" value="webapp" />
+  </attributes>
+</project-module>
+
