@@ -38,6 +38,9 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	public T get(final PK id) {
 		return getEntityDao().get(id);
 	}
+	public T getFullText(final PK id) {
+		return getEntityDao().getFullText(id);
+	}
 
 	@Transactional(readOnly = true)
 	public Page<T> getAll(final Page<T> page) {
