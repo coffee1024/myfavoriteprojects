@@ -44,14 +44,17 @@ public class JUnitDaoTest extends AbstractBaseTestCase {
 //			ff.setContent("中华人民共和国你好大中国北京南京"+i);
 //			ffd.saveFullText(ff);
 //		}
-//		System.out.println(ffd.fullTextQuary("中华人民共和国"));
-		BooleanClause.Occur[] flags=new BooleanClause.Occur[]{BooleanClause.Occur.SHOULD};
-		Page<TestDomain> page=new Page<TestDomain>(3);
-		page.setPageNo(2);
-		page=ffd.fullTextPageQuary(page, new String[]{"content"}, new String[]{"中华人民共和国大人小孩哦中国北京南京"},flags, Version.LUCENE_36, new AnsjAnalysis(),true);
-		for (TestDomain domain : page.getItems()) {
-			System.out.println(domain.getContent());
-		}
+////		System.out.println(ffd.fullTextQuary("中华人民共和国"));
+//		BooleanClause.Occur[] flags=new BooleanClause.Occur[]{BooleanClause.Occur.SHOULD};
+//		Page<TestDomain> page=new Page<TestDomain>(3);
+//		page.setPageNo(2);
+//		page=ffd.fullTextPageQuary(page, new String[]{"content"}, new String[]{"中华人民共和国大人小孩哦中国北京南京"},flags, Version.LUCENE_36, new AnsjAnalysis(),true);
+//		for (TestDomain domain : page.getItems()) {
+//			System.out.println(domain.getContent());
+//		}
+		TestDomain domain=ffd.get(54L);
+		domain.setContent("zhonghurenminggongheguo");
+		ffd.saveFullText(domain);
 	}
 	
 }
