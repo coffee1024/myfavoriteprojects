@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.sun.accessibility.internal.resources.accessibility;
+
+import weibo4j.Account;
 import weibo4j.Oauth;
 import weibo4j.http.AccessToken;
 import weibo4j.model.WeiboException;
@@ -49,9 +52,11 @@ public class Xlrenzheng extends HttpServlet {
 			AccessToken at;
 			try {
 				at=oauth.getAccessTokenByCode(code);
-				request.getSession().setAttribute("xlat", at);
+				String uid=new Account().getUid().get("uid").toString();
+				request.getSession().setAttribute("uid", uid);
+				request.getSession().setAttribute(uid+"_at", at);
 				response.sendRedirect("xlsuccess");
-			} catch (WeiboException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
