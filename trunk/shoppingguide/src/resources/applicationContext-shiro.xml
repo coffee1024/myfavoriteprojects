@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+		<property name="authenticator" ref="modularRealmAuthenticator"></property>  
+	    <property name="realms">  
+	        <list>  
+	            <ref bean="shiroDbRealm"/>  
+	        </list>  
+	    </property>  
+	      
+	</bean>  
+	  
+	<bean id="modularRealmAuthenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">  
+	    <property name="authenticationStrategy" ref="firstSuccessfulStrategy"></property>  
+	</bean>  
+	  
+	<bean id="firstSuccessfulStrategy" class="org.apache.shiro.authc.pam.FirstSuccessfulStrategy" />
+	<bean id="alLeastOneSuccessfulStrategy" class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy" />
+	<bean id="allSuccessfulStrategy" class="org.apache.shiro.authc.pam.AllSuccessfulStrategy" />
+	 
+	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
+	<bean id="shiroDbRealm" class="com.coffee.shiro.ShiroDbRealm" >
+	</bean>
+	
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/index.jsp" />
+		<property name="filterChainDefinitions">
+			<value>
+				/login.jsp = authc 
+				/index.jsp = user
+				/logout = logout
+				/css/** = anon
+				/js/** = anon
+				/images/** = anon
+				/** = user
+			</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>
