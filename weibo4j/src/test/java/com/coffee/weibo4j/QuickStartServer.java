@@ -10,7 +10,7 @@ import org.eclipse.jetty.server.Server;
 public class QuickStartServer {
 
 	public static final int PORT = 8080;
-	public static final String CONTEXT = "/weibo4j-coffee";
+	public static final String CONTEXT = "/weibo";
 	public static final String[] TLD_JAR_NAMES = new String[] { "sitemesh", "spring-webmvc", "shiro-web",
 			"springside-core" };
 
