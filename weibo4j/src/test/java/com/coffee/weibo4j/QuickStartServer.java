@@ -26,9 +26,7 @@ public class QuickStartServer {
 			server.start();
 
 			System.out.println("[INFO] Server running at http://localhost:" + PORT + CONTEXT);
-			System.out.println("[HINT] Hit Enter to reload the application quickly");
 
-			// 等待用户输入回车重载应用.
 			if (scanIntervalSeconds > 0) {
 				Scanner scanner = new Scanner(PathKit.getRootClassPath(), scanIntervalSeconds,server) {
 					public void onChange() {
@@ -37,7 +35,6 @@ public class QuickStartServer {
 							JettyFactory.reloadContext(this.server);
 							System.err.println("Loading complete.");
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					} 
