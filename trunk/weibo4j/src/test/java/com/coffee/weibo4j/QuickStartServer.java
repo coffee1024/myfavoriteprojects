@@ -28,10 +28,21 @@ public class QuickStartServer {
 			System.out.println("[INFO] Server running at http://localhost:" + PORT + CONTEXT);
 
 			if (scanIntervalSeconds > 0) {
-				Scanner scanner = new Scanner(PathKit.getRootClassPath(), scanIntervalSeconds,server) {
+				Scanner scanner1 = new Scanner("target/test-classes", scanIntervalSeconds,server) {
 					public void onChange() {
 						try {
-							System.err.println("\nLoading changes ......");
+							System.err.println("\nLoading test-classes changes ......");
+							JettyFactory.reloadContext(this.server);
+							System.err.println("Loading complete.");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} 
+				};
+				Scanner scanner2 = new Scanner("target/classes", scanIntervalSeconds,server) {
+					public void onChange() {
+						try {
+							System.err.println("\nLoading classes changes ......");
 							JettyFactory.reloadContext(this.server);
 							System.err.println("Loading complete.");
 						} catch (Exception e) {
@@ -40,7 +51,8 @@ public class QuickStartServer {
 					} 
 				};
 				System.out.println("Starting scanner at interval of " + scanIntervalSeconds + " seconds.");
-				scanner.start();
+				scanner1.start();
+				scanner2.start();
 			}
 //			while (true) {
 //				char c = (char) System.in.read();
