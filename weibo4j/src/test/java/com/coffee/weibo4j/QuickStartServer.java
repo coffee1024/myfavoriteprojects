@@ -10,6 +10,7 @@ import org.eclipse.jetty.server.Server;
 public class QuickStartServer {
 
 	public static final int PORT = 8080;
+	public static final int scanIntervalSeconds = 10;
 	public static final String CONTEXT = "/weibo";
 	public static final String[] TLD_JAR_NAMES = new String[] { "sitemesh", "spring-webmvc", "shiro-web",
 			"springside-core" };
@@ -21,7 +22,6 @@ public class QuickStartServer {
 		// 启动Jetty
 		Server server = JettyFactory.createServerInSource(PORT, CONTEXT);
 		JettyFactory.setTldJarNames(server, TLD_JAR_NAMES);
-
 		try {
 			server.start();
 
@@ -29,12 +29,28 @@ public class QuickStartServer {
 			System.out.println("[HINT] Hit Enter to reload the application quickly");
 
 			// 等待用户输入回车重载应用.
-			while (true) {
-				char c = (char) System.in.read();
-				if (c == '\n') {
-					JettyFactory.reloadContext(server);
-				}
+			if (scanIntervalSeconds > 0) {
+				Scanner scanner = new Scanner(PathKit.getRootClassPath(), scanIntervalSeconds,server) {
+					public void onChange() {
+						try {
+							System.err.println("\nLoading changes ......");
+							JettyFactory.reloadContext(this.server);
+							System.err.println("Loading complete.");
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} 
+				};
+				System.out.println("Starting scanner at interval of " + scanIntervalSeconds + " seconds.");
+				scanner.start();
 			}
+//			while (true) {
+//				char c = (char) System.in.read();
+//				if (c == '\n') {
+//					JettyFactory.reloadContext(server);
+//				}
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);
