@@ -42,9 +42,8 @@ public class Exceptions {
 	 */
 	public static String getErrorMessageWithNestedException(Throwable ex) {
 		Throwable nestedException = ex.getCause();
-		return new StringBuilder().append(ex.getMessage()).append(" nested exception is ")
-				.append(nestedException.getClass().getName()).append(":").append(nestedException.getMessage())
-				.toString();
+		return new StringBuilder().append(ex.getMessage()).append(" nested exception is ").append(
+				nestedException.getClass().getName()).append(":").append(nestedException.getMessage()).toString();
 	}
 
 	/**

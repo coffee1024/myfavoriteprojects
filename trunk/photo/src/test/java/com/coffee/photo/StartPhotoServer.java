@@ -15,7 +15,7 @@ import com.coffee.photo.spring.Profiles;
  * 
  * @author calvin
  */
-public class QuickStartServer {
+public class StartPhotoServer {
 
 	public static final int PORT = 8080;
 	public static final String CONTEXT = "/photo";

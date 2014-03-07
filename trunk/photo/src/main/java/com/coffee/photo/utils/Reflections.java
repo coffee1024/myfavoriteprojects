@@ -204,7 +204,8 @@ public class Reflections {
 	 */
 	public static void makeAccessible(Field field) {
 		if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers()) || Modifier
-				.isFinal(field.getModifiers())) && !field.isAccessible()) {
+				.isFinal(field.getModifiers()))
+				&& !field.isAccessible()) {
 			field.setAccessible(true);
 		}
 	}

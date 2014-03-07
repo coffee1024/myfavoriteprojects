@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.coffee.photo.entity.User;
 import com.coffee.photo.service.account.AccountService;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
@@ -41,7 +42,7 @@ public class ProfileController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute("user") User user) {
 		accountService.updateUser(user);
-		updateCurrentUserName(user.getName());
+		updateCurrentUserName(user.getNickName());
 		return "redirect:/";
 	}
 
