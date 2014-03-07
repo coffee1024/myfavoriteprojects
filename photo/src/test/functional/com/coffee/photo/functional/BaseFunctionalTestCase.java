@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
-import com.coffee.photo.QuickStartServer;
+import com.coffee.photo.StartPhotoServer;
 import com.coffee.photo.data.DataFixtures;
 import com.coffee.photo.jetty.JettyFactory;
 import com.coffee.photo.spring.Profiles;
@@ -65,8 +65,8 @@ public class BaseFunctionalTestCase {
 			// 设定Spring的profile
 			Profiles.setProfileAsSystemProperty(Profiles.FUNCTIONAL_TEST);
 
-			jettyServer = JettyFactory.createServerInSource(new URL(baseUrl).getPort(), QuickStartServer.CONTEXT);
-			JettyFactory.setTldJarNames(jettyServer, QuickStartServer.TLD_JAR_NAMES);
+			jettyServer = JettyFactory.createServerInSource(new URL(baseUrl).getPort(), StartPhotoServer.CONTEXT);
+			JettyFactory.setTldJarNames(jettyServer, StartPhotoServer.TLD_JAR_NAMES);
 			jettyServer.start();
 
 			logger.info("Jetty Server started at {}", baseUrl);

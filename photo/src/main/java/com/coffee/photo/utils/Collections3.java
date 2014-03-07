@@ -39,8 +39,8 @@ public class Collections3 {
 
 		try {
 			for (Object obj : collection) {
-				map.put(PropertyUtils.getProperty(obj, keyPropertyName),
-						PropertyUtils.getProperty(obj, valuePropertyName));
+				map.put(PropertyUtils.getProperty(obj, keyPropertyName), PropertyUtils.getProperty(obj,
+						valuePropertyName));
 			}
 		} catch (Exception e) {
 			throw Reflections.convertReflectionExceptionToUnchecked(e);

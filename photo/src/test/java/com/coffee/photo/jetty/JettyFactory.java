@@ -59,8 +59,8 @@ public class JettyFactory {
 			jarNameExprssions.add(".*/" + jarName + "-[^/]*\\.jar$");
 		}
 
-		context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-				StringUtils.join(jarNameExprssions, '|'));
+		context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", StringUtils.join(
+				jarNameExprssions, '|'));
 
 	}
 

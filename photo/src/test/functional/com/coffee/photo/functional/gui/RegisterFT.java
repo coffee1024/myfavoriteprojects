@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+
 import com.coffee.photo.functional.BaseSeleniumTestCase;
 
 public class RegisterFT extends BaseSeleniumTestCase {
