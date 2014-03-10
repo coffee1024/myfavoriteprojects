@@ -13,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.coffee.photo.data.UserData;
 import com.coffee.photo.entity.User;
-import com.coffee.photo.repository.TaskDao;
 import com.coffee.photo.repository.UserDao;
 import com.coffee.photo.service.ServiceException;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
@@ -32,9 +31,6 @@ public class AccountServiceTest {
 
 	@Mock
 	private UserDao mockUserDao;
-
-	@Mock
-	private TaskDao mockTaskDao;
 
 	@Before
 	public void setUp() {
