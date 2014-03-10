@@ -23,7 +23,7 @@ import com.coffee.photo.service.account.UserService;
 public class RegisterController {
 
 	@Autowired
-	private UserService accountService;
+	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerForm() {
@@ -32,7 +32,7 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String register(@Valid User user, RedirectAttributes redirectAttributes) {
-		accountService.registerUser(user);
+		userService.registerUser(user);
 		redirectAttributes.addFlashAttribute("username", user.getLoginName());
 		return "redirect:/login";
 	}
@@ -43,7 +43,7 @@ public class RegisterController {
 	@RequestMapping(value = "checkLoginName")
 	@ResponseBody
 	public String checkLoginName(@RequestParam("loginName") String loginName) {
-		if (accountService.findUserByLoginName(loginName) == null) {
+		if (userService.findUserByLoginName(loginName) == null) {
 			return "true";
 		} else {
 			return "false";
