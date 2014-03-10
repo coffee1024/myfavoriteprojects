@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.coffee.photo.data.UserData;
-import com.coffee.photo.entity.User;
-import com.coffee.photo.repository.UserDao;
+import com.coffee.photo.entity.account.User;
+import com.coffee.photo.repository.account.UserDao;
 import com.coffee.photo.service.ServiceException;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
 import com.coffee.photo.shiro.ShiroTestUtils;
@@ -27,7 +27,7 @@ import com.coffee.photo.utils.Clock.MockClock;
 public class AccountServiceTest {
 
 	@InjectMocks
-	private AccountService accountService;
+	private UserService accountService;
 
 	@Mock
 	private UserDao mockUserDao;
