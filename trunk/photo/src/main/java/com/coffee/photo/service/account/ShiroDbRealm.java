@@ -16,13 +16,13 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.coffee.photo.entity.User;
+import com.coffee.photo.entity.account.User;
 import com.coffee.photo.utils.Encodes;
 import com.google.common.base.Objects;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
-	protected AccountService accountService;
+	protected UserService accountService;
 
 	/**
 	 * 认证回调函数,登录时调用.
@@ -57,13 +57,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
-		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountService.HASH_ALGORITHM);
-		matcher.setHashIterations(AccountService.HASH_INTERATIONS);
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(UserService.HASH_ALGORITHM);
+		matcher.setHashIterations(UserService.HASH_INTERATIONS);
 
 		setCredentialsMatcher(matcher);
 	}
 
-	public void setAccountService(AccountService accountService) {
+	public void setAccountService(UserService accountService) {
 		this.accountService = accountService;
 	}
 

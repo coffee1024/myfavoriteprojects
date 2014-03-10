@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.coffee.photo.entity.User;
-import com.coffee.photo.service.account.AccountService;
+import com.coffee.photo.entity.account.User;
+import com.coffee.photo.service.account.UserService;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
 
 /**
@@ -25,7 +25,7 @@ import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
 public class ProfileController {
 
 	@Autowired
-	private AccountService accountService;
+	private UserService accountService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String updateForm(Model model) {
