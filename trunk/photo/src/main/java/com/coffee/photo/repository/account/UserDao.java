@@ -1,7 +1,5 @@
 package com.coffee.photo.repository.account;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -11,7 +9,5 @@ public interface UserDao extends PagingAndSortingRepository<User, Long>, JpaSpec
 	User findByLoginName(String loginName);
 
 	User findByEmail(String email);
-
-	List<User> findByAppId(Long appId);
 
 }

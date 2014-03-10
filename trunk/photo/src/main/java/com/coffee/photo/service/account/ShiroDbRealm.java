@@ -22,7 +22,7 @@ import com.google.common.base.Objects;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
-	protected UserService accountService;
+	protected UserService userService;
 
 	/**
 	 * 认证回调函数,登录时调用.
@@ -30,7 +30,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User user = accountService.findUserByLoginName(token.getUsername());
+		User user = userService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] salt = Encodes.decodeHex(user.getSalt());
 			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getNickName()),
@@ -46,7 +46,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		User user = accountService.findUserByLoginName(shiroUser.loginName);
+		User user = userService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(user.getRoleList());
 		return info;
@@ -63,8 +63,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		setCredentialsMatcher(matcher);
 	}
 
-	public void setAccountService(UserService accountService) {
-		this.accountService = accountService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	/**
