@@ -26,6 +26,30 @@ public class User extends IdEntity {
 	 * 昵称
 	 */
 	private String nickName;
+	private String trueName;
+	/**
+	 * 电子邮件
+	 */
+	private String email;
+	/**
+	 * 地址
+	 */
+	private String address;
+	/**
+	 * 邮编
+	 */
+	private String postCode;
+	/**
+	 * 电话
+	 */
+	private String telePhone;
+	/**
+	 * 移动电话
+	 */
+	private String mobile;
+	/**
+	 * 原密码
+	 */
 	private String plainPassword;
 	/**
 	 * 加密后的密码
@@ -34,6 +58,22 @@ public class User extends IdEntity {
 	private String salt;
 	private String roles;
 	private Date registerDate;
+	/**
+	 * 用户状态0 启用 -1 停用
+	 */
+	private Integer status;
+	/**
+	 * 创建人
+	 */
+	private Long createUser;
+	/**
+	 * 上次修改人
+	 */
+	private Long updateUser;
+	/**
+	 * 上次修改时间
+	 */
+	private Date updateDate;
 	/**
 	 * 积分
 	 */
@@ -46,6 +86,10 @@ public class User extends IdEntity {
 	 * 花费的金额
 	 */
 	private Double expense;
+	/**
+	 * 会员星级
+	 */
+	private Double star;
 
 	public User() {
 
@@ -130,6 +174,86 @@ public class User extends IdEntity {
 
 	public void setExpense(Double expense) {
 		this.expense = expense;
+	}
+
+	public String getTrueName() {
+		return trueName;
+	}
+
+	public void setTrueName(String trueName) {
+		this.trueName = trueName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
+	public String getTelePhone() {
+		return telePhone;
+	}
+
+	public void setTelePhone(String telePhone) {
+		this.telePhone = telePhone;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Long getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(Long createUser) {
+		this.createUser = createUser;
+	}
+
+	public Long getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(Long updateUser) {
+		this.updateUser = updateUser;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	@Transient
