@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.coffee.photo.entity.User;
-import com.coffee.photo.service.account.AccountService;
+import com.coffee.photo.entity.account.User;
+import com.coffee.photo.service.account.UserService;
 
 /**
  * 用户注册的Controller.
@@ -23,7 +23,7 @@ import com.coffee.photo.service.account.AccountService;
 public class RegisterController {
 
 	@Autowired
-	private AccountService accountService;
+	private UserService accountService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerForm() {

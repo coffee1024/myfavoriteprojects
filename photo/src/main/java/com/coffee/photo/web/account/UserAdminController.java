@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.coffee.photo.entity.User;
-import com.coffee.photo.service.account.AccountService;
+import com.coffee.photo.entity.account.User;
+import com.coffee.photo.service.account.UserService;
 
 /**
  * 管理员管理用户的Controller.
@@ -27,7 +27,7 @@ import com.coffee.photo.service.account.AccountService;
 public class UserAdminController {
 
 	@Autowired
-	private AccountService accountService;
+	private UserService accountService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
