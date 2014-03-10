@@ -1,6 +1,6 @@
 package com.coffee.photo.data;
 
-import com.coffee.photo.entity.User;
+import com.coffee.photo.entity.account.User;
 
 public class UserData {
 
