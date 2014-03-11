@@ -17,12 +17,12 @@
 	</appender>
 
 	<!-- project default level -->
-	<logger name="com.coffee.photo" level="INFO" />
+	<logger name="com.coffee.photo" level="debug" />
 
 	<!--log4jdbc -->
-	<logger name="jdbc.sqltiming" level="INFO"/>
+	<logger name="jdbc.sqltiming" level="debug"/>
 
-	<root level="WARN">
+	<root level="debug">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>

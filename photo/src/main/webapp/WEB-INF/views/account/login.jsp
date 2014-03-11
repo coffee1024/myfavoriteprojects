@@ -8,10 +8,12 @@
 <html>
 <head>
 	<title>登录页</title>
+	<link href="${ctx}/static/styles/signin.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-	<form  class="form-signin" id="loginForm" action="${ctx}/login" method="post" class="form-horizontal">
+	<div class="container">
+	<form  class="form-signin" id="loginForm" action="${ctx}/login" method="post">
 	<%
 	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 	if(error != null){
@@ -22,15 +24,15 @@
 	<%
 	}
 	%>
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+        <h2 class="form-signin-heading">请登录</h2>
+        <input type="text" class="form-control" placeholder="用户名" name="username" required autofocus>
+        <input type="password" class="form-control" placeholder="密码"  name="password" required>
+        <label class="checkbox" for="rememberMe">
+        	<input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button> <button class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:void(0);">注册</button>
       </form>
-
+	</div>
 	<script>
 		$(document).ready(function() {
 			$("#loginForm").validate();
