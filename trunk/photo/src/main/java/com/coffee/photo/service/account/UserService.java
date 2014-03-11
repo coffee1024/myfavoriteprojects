@@ -1,12 +1,23 @@
 package com.coffee.photo.service.account;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +28,7 @@ import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
 import com.coffee.photo.utils.Clock;
 import com.coffee.photo.utils.Digests;
 import com.coffee.photo.utils.Encodes;
+import com.google.common.collect.Lists;
 
 /**
  * 用户管理类.
@@ -106,5 +118,67 @@ public class UserService {
 
 	public void setClock(Clock clock) {
 		this.clock = clock;
+	}
+
+	public List<User> search(String loginName, Integer userType, Integer status, String email, String nickName,
+			Date startDate, Date endDate, Integer searchType) {
+		List<User> userList = userDao.findAll(getSpec(loginName, userType, status, email, nickName, startDate, endDate,
+				searchType), new Sort(new Order(Direction.DESC, "registerDate")));
+		return userList;
+	}
+
+	public Specification<User> getSpec(final String loginName, final Integer userType, final Integer status,
+			final String email, final String nickName, final Date startDate, final Date endDate,
+			final Integer searchType) {
+		return new Specification<User>() {
+			@Override
+			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				// TODO Auto-generated method stub
+				List<Predicate> predicates = Lists.newArrayList();
+				Path<String> loginNamePath = root.get("loginName");
+				Path<Integer> userTypePath = root.get("userType");
+				Path<String> emailPath = root.get("email");
+				Path<String> statusPath = root.get("status");
+				Path<String> namePath = root.get("nickName");
+				Path<Date> startDatePath = root.get("startDate");
+				Path<Date> endDatePath = root.get("endDate");
+				if (StringUtils.isNotBlank(loginName)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(loginNamePath, loginName));
+					} else {
+						predicates.add(cb.like(loginNamePath, "%" + loginName + "%"));
+					}
+				}
+				if (userType != null) {
+					predicates.add(cb.equal(userTypePath, userType));
+				}
+				if (status != null) {
+					predicates.add(cb.equal(statusPath, status));
+				}
+				if (StringUtils.isNotBlank(email)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(emailPath, email));
+					} else {
+						predicates.add(cb.like(emailPath, "%" + email + "%"));
+					}
+				}
+				if (StringUtils.isNotBlank(nickName)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(namePath, nickName));
+					} else {
+						predicates.add(cb.like(namePath, "%" + nickName + "%"));
+					}
+				}
+				if (startDate != null) {
+					predicates.add(cb.greaterThanOrEqualTo(startDatePath, startDate));
+				}
+				if (endDate != null) {
+					predicates.add(cb.lessThanOrEqualTo(endDatePath, endDate));
+				}
+
+				Predicate[] arr = predicates.toArray(new Predicate[predicates.size()]);
+				return query.where(arr).getRestriction();
+			}
+		};
 	}
 }

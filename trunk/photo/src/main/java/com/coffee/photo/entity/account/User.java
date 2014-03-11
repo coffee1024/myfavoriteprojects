@@ -92,6 +92,8 @@ public class User extends IdEntity {
 	 */
 	private Double star;
 
+	private Integer userType;
+
 	public User() {
 
 	}
@@ -272,6 +274,22 @@ public class User extends IdEntity {
 
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
+	}
+
+	public Double getStar() {
+		return star;
+	}
+
+	public void setStar(Double star) {
+		this.star = star;
+	}
+
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
 	}
 
 	@Override
