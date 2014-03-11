@@ -14,9 +14,8 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -120,10 +119,10 @@ public class UserService {
 		this.clock = clock;
 	}
 
-	public List<User> search(String loginName, Integer userType, Integer status, String email, String nickName,
-			Date startDate, Date endDate, Integer searchType) {
-		List<User> userList = userDao.findAll(getSpec(loginName, userType, status, email, nickName, startDate, endDate,
-				searchType), new Sort(new Order(Direction.DESC, "registerDate")));
+	public Page<User> search(String loginName, Integer userType, Integer status, String email, String nickName,
+			Date startDate, Date endDate, Integer searchType, Pageable pageRequest) {
+		Page<User> userList = userDao.findAll(getSpec(loginName, userType, status, email, nickName, startDate, endDate,
+				searchType), pageRequest);
 		return userList;
 	}
 
@@ -140,8 +139,7 @@ public class UserService {
 				Path<String> emailPath = root.get("email");
 				Path<String> statusPath = root.get("status");
 				Path<String> namePath = root.get("nickName");
-				Path<Date> startDatePath = root.get("startDate");
-				Path<Date> endDatePath = root.get("endDate");
+				Path<Date> registerDatePath = root.get("registerDate");
 				if (StringUtils.isNotBlank(loginName)) {
 					if ((searchType != null) && (searchType.intValue() == 0)) {
 						predicates.add(cb.equal(loginNamePath, loginName));
@@ -170,10 +168,10 @@ public class UserService {
 					}
 				}
 				if (startDate != null) {
-					predicates.add(cb.greaterThanOrEqualTo(startDatePath, startDate));
+					predicates.add(cb.greaterThanOrEqualTo(registerDatePath, startDate));
 				}
 				if (endDate != null) {
-					predicates.add(cb.lessThanOrEqualTo(endDatePath, endDate));
+					predicates.add(cb.lessThanOrEqualTo(registerDatePath, endDate));
 				}
 
 				Predicate[] arr = predicates.toArray(new Predicate[predicates.size()]);

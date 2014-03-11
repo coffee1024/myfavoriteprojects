@@ -1,10 +1,16 @@
 package com.coffee.photo.web.account;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,10 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coffee.photo.entity.account.User;
 import com.coffee.photo.service.account.UserService;
+import com.coffee.photo.utils.JsonMapper;
 import com.coffee.photo.web.BaseController;
 
 /**
@@ -57,6 +65,29 @@ public class UserAdminController extends BaseController {
 		userService.deleteUser(id);
 		redirectAttributes.addFlashAttribute("message", "删除用户" + user.getLoginName() + "成功");
 		return "redirect:/admin/user";
+	}
+
+	/*
+	 * 查询所有用户
+	 */
+	@RequestMapping(value = "list", method = RequestMethod.GET, produces = MediaType.ALL_VALUE)
+	@ResponseBody
+	public String listUser(@RequestParam(value = "loginName", required = false) String loginName,
+			@RequestParam(value = "userType", required = false) Integer userType,
+			@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "nickName", required = false) String nickName,
+			@RequestParam(value = "startDate", required = false) Date startDate,
+			@RequestParam(value = "endDate", required = false) Date endDate,
+			@RequestParam(value = "searchType", required = false) Integer searchType,
+			@RequestParam(value = "status", required = false) Integer status, HttpServletRequest request,
+			HttpServletResponse response) throws IOException, InstantiationException, IllegalAccessException {
+		buildPageRequest(request);
+		Page<User> userList = userService.search(loginName, userType, status, email, nickName, startDate, endDate,
+				searchType, pageRequest);
+		String str = JsonMapper.nonEmptyMapper().toJson(userList);
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().write(str);
+		return null;
 	}
 
 	/**

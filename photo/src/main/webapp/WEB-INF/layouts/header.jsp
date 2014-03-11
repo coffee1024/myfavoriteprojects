@@ -4,11 +4,11 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header">
 	<div id="title">
-	    <h1><a href="${ctx}">用户登录</a>
+	    <h1><a href="${ctx}">图片分享系统</a>
 	    <shiro:user>
 			<div class="btn-group pull-right">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i> <shiro:principal property="name"/>
+					<i class="icon-user"></i>欢迎您： <shiro:principal property="name"/>
 					<span class="caret"></span>
 				</a>
 			
@@ -17,7 +17,7 @@
 						<li><a href="${ctx}/admin/user">Admin Users</a></li>
 						<li class="divider"></li>
 					</shiro:hasRole>
-					<li><a href="${ctx}/logout">Logout</a></li>
+					<li><a href="${ctx}/logout">退出</a></li>
 				</ul>
 			</div>
 		</shiro:user>
