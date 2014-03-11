@@ -30,7 +30,7 @@
         <label class="checkbox" for="rememberMe">
         	<input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button> <button class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:void(0);">注册</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button> <a class="btn btn-lg btn-primary btn-block" href="${ctx}/register">注册</a>
       </form>
 	</div>
 	<script>

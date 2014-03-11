@@ -20,10 +20,10 @@
 	<logger name="com.coffee.photo" level="debug" />
 
 	<!--log4jdbc -->
-	<logger name="jdbc.sqltiming" level="debug"/>
+	<logger name="jdbc.sqltiming" level="error"/>
 
-	<root level="debug">
+	<root level="error">
 		<appender-ref ref="console" />
-		<appender-ref ref="rollingFile" />
+<!--		<appender-ref ref="rollingFile" />-->
 	</root>
 </configuration>
