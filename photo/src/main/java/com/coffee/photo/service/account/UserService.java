@@ -94,9 +94,16 @@ public class UserService {
 	/**
 	 * 取出Shiro中的当前用户LoginName.
 	 */
-	private String getCurrentUserName() {
+	public String getCurrentUserName() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		return user.loginName;
+	}
+	/**
+	 * 取出Shiro中的当前用户.
+	 */
+	public ShiroUser getCurrentUser() {
+		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		return user;
 	}
 
 	/**

@@ -65,6 +65,6 @@ public class ProfileController {
 	 */
 	private void updateCurrentUserName(String userName) {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		user.name = userName;
+		user.nickName = userName;
 	}
 }
