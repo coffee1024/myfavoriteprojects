@@ -74,16 +74,16 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		private static final long serialVersionUID = -1373760761780840081L;
 		public Long id;
 		public String loginName;
-		public String name;
+		public String nickName;
 
-		public ShiroUser(Long id, String loginName, String name) {
+		public ShiroUser(Long id, String loginName, String nickName) {
 			this.id = id;
 			this.loginName = loginName;
-			this.name = name;
+			this.nickName = nickName;
 		}
 
-		public String getName() {
-			return name;
+		public String getNickName() {
+			return nickName;
 		}
 
 		/**
