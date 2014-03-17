@@ -101,8 +101,7 @@ public class PhotoFileService {
 		 */
 		// 修改为在年月日时分时候加入_符号
 		// logger.debug("dttime is:"+dt.getTime());
-		StringUtils.substringAfterLast(fileName, ".");
-		String sResult = rootPath+File.separator+ DateFormatUtils.format(dt, "yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator+"HH") +File.separator+ dt.getTime();
+		String sResult = rootPath+File.separator+ DateFormatUtils.format(dt, "yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator+"HH") +File.separator+ dt.getTime()+"."+StringUtils.substringAfterLast(fileName, ".");
 		return sResult;
 	}
 }

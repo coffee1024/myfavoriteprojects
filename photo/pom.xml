@@ -69,7 +69,13 @@
 <!--			<artifactId>springside-core</artifactId>-->
 <!--			<version>${springside.version}</version>-->
 <!--		</dependency>-->
-
+<!--		-->
+		<dependency>
+            <groupId>org.apache.ftpserver</groupId>
+            <artifactId>ftpserver-core</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+<!---->
 		<!-- PERSISTENCE begin -->
 		<!-- hibernate -->
 		<dependency>

@@ -2,7 +2,10 @@
 <projectDescription>
   <name>photo</name>
   <comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects/>
+  <projects>
+    <project>ftpserver-core-1.0.x</project>
+    <project>ftplet-api-1.0.x</project>
+  </projects>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>

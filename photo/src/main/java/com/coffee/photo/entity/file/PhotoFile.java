@@ -34,6 +34,8 @@ public class PhotoFile extends IdEntity {
 	private Integer type;
 	private Integer recommend;
 	private String extName;
+	private Boolean isOriginal;
+	private Integer status;
 
 	public String getTitle() {
 		return title;
@@ -97,6 +99,23 @@ public class PhotoFile extends IdEntity {
 
 	public void setHeight(Integer height) {
 		this.height = height;
+	}
+
+	
+	public Boolean getIsOriginal() {
+		return isOriginal;
+	}
+
+	public void setIsOriginal(Boolean isOriginal) {
+		this.isOriginal = isOriginal;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	// 设定JSON序列化时的日期格式

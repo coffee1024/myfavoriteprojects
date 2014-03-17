@@ -64,7 +64,6 @@ public class UserService {
 		entryptPassword(user);
 		user.setRoles("user");
 		user.setRegisterDate(clock.getCurrentDate());
-
 		userDao.save(user);
 	}
 
