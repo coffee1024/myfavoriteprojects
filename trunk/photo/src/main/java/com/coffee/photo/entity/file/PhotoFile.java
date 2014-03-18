@@ -35,7 +35,16 @@ public class PhotoFile extends IdEntity {
 	private Integer recommend;
 	private String extName;
 	private Boolean isOriginal;
+	/**
+	 * 图片状态  0 上传未填写说明
+	 * 			1 填写说明未审核
+	 * 			2 审核通过
+	 */
 	private Integer status;
+	/**
+	 * 上传类型  0 http上传   1 ftp上传
+	 */
+	private Integer uploadType;
 
 	public String getTitle() {
 		return title;
@@ -174,6 +183,14 @@ public class PhotoFile extends IdEntity {
 
 	public void setExtName(String extName) {
 		this.extName = extName;
+	}
+	
+	public Integer getUploadType() {
+		return uploadType;
+	}
+
+	public void setUploadType(Integer uploadType) {
+		this.uploadType = uploadType;
 	}
 
 	@Override

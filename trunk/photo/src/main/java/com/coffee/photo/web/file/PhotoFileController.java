@@ -1,4 +1,4 @@
-package com.coffee.photo.web.account;
+package com.coffee.photo.web.file;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +32,8 @@ public class PhotoFileController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String upload(HttpServletRequest request,HttpServletResponse response) {
-		photoFileService.saveFile(request);
-		return "account/login";
+		photoFileService.saveHttpFile(request);
+		return "";
 	}
 
 }

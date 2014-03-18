@@ -13,11 +13,13 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.coffee.photo.entity.account.User;
 import com.coffee.photo.entity.file.PhotoFile;
 import com.coffee.photo.repository.file.PhotoFileDao;
 import com.coffee.photo.service.account.UserService;
@@ -30,13 +32,15 @@ import com.coffee.photo.utils.ImageUtils;
 public class PhotoFileService {
 	@Value("${photo.store.originalphoto}")
 	private  String originalFilePath;
+	@Value("${photo.upload.enablext}")
+	private  String enableExt;
 	
 	@Autowired
 	private PhotoFileDao photoFileDao;
 	@Autowired
 	private UserService userService;
 	
-	public void saveFile(HttpServletRequest request) {
+	public void saveHttpFile(HttpServletRequest request) {
 		
 		DiskFileItemFactory fac = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(fac);
@@ -85,6 +89,7 @@ public class PhotoFileService {
 			photoFile.setSourceFileLength(size);
 			photoFile.setSourceFileName(fileName);
 			photoFile.setSourceFilePath(savePath);
+			photoFile.setUploadType(0);
 			photoFileDao.save(photoFile);
 		}
 	}
@@ -103,5 +108,35 @@ public class PhotoFileService {
 		// logger.debug("dttime is:"+dt.getTime());
 		String sResult = rootPath+File.separator+ DateFormatUtils.format(dt, "yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator+"HH") +File.separator+ dt.getTime()+"."+StringUtils.substringAfterLast(fileName, ".");
 		return sResult;
+	}
+	public void saveFtpFile(String filePath,String fileName,User user) throws FtpException {
+			
+			File file=new File(filePath);
+			if (file.exists()&&user!=null) {
+				PhotoFile photoFile=new PhotoFile();
+				Map<String, Integer> map=ImageUtils.getPictureSize(filePath);
+				if (map!=null) {
+					photoFile.setHeight(map.get("height"));
+					photoFile.setWidth(map.get("width"));
+				}
+				photoFile.setCreateDate(new Date());
+				photoFile.setCreateUserId(user.getId());
+				photoFile.setCreateUserLoginName(user.getLoginName());
+				photoFile.setCreateUserNickName(user.getNickName());
+				photoFile.setSourceFileLength(file.length());
+				photoFile.setSourceFileName(fileName);
+				photoFile.setSourceFilePath(filePath);
+				photoFile.setUploadType(1);
+				photoFileDao.save(photoFile);
+			}else{
+				throw new FtpException("ftp上传入库失败");
+			}
+		}
+	public boolean checkExt(String fileName){
+		String ext=fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
+		if (StringUtils.isNotBlank(enableExt)&&StringUtils.isNotBlank(ext)) {
+			return StringUtils.contains(enableExt, ext);
+		}
+		return false;
 	}
 }
