@@ -1,5 +1,6 @@
 package com.coffee.photo.utils.ftp;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.ftpserver.ftplet.DefaultFtplet;
@@ -9,9 +10,18 @@ import org.apache.ftpserver.ftplet.FtpRequest;
 import org.apache.ftpserver.ftplet.FtpSession;
 import org.apache.ftpserver.ftplet.FtpletContext;
 import org.apache.ftpserver.ftplet.FtpletResult;
+import org.apache.ftpserver.ftplet.User;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.coffee.photo.service.account.UserService;
+import com.coffee.photo.service.file.PhotoFileService;
 
 public class FtpService extends DefaultFtplet{
 
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private PhotoFileService photoFileService;
 	@Override
 	public FtpletResult afterCommand(FtpSession session, FtpRequest request,
 			FtpReply reply) throws FtpException, IOException {
@@ -157,6 +167,10 @@ public class FtpService extends DefaultFtplet{
 		String path=session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
 		String name=request.getArgument();
 		String root=session.getUser().getHomeDirectory();
+		String filePath=root+File.separator+path+File.separator+name;
+		User ftpUser=session.getUser();
+		com.coffee.photo.entity.account.User user=userService.findUserByLoginName(ftpUser.getName());
+		photoFileService.saveFtpFile(filePath, name, user);
 		return super.onUploadEnd(session, request);
 	}
 
@@ -164,7 +178,13 @@ public class FtpService extends DefaultFtplet{
 	public FtpletResult onUploadStart(FtpSession session, FtpRequest request)
 			throws FtpException, IOException {
 		// TODO Auto-generated method stub
-		return super.onUploadStart(session, request);
+//		throw new FtpException("禁止上传");
+		String name=request.getArgument();
+		if (photoFileService.checkExt(name)) {
+			return super.onUploadStart(session, request);
+		} else {
+			return FtpletResult.DISCONNECT;
+		}
 	}
 
 	@Override
