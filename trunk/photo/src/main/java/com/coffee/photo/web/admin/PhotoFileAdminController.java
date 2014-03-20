@@ -1,12 +1,10 @@
-package com.coffee.photo.web.account;
+package com.coffee.photo.web.admin;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coffee.photo.entity.account.User;
+import com.coffee.photo.entity.file.PhotoFile;
+import com.coffee.photo.entity.file.PhotoFile.Status;
 import com.coffee.photo.service.account.UserService;
+import com.coffee.photo.service.file.PhotoFileService;
 import com.coffee.photo.utils.JsonMapper;
 import com.coffee.photo.web.BaseController;
 
@@ -32,32 +33,41 @@ import com.coffee.photo.web.BaseController;
  * @author calvin
  */
 @Controller
-@RequestMapping(value = "/admin/user")
-public class UserAdminController extends BaseController {
+@RequestMapping(value = "/admin/file")
+public class PhotoFileAdminController extends BaseController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PhotoFileService photoFileService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
-		List<User> users = userService.getAllUser();
-		model.addAttribute("users", users);
-
-		return "account/adminUserList";
+	@RequestMapping(value = "list")
+	public String list(HttpServletRequest request,HttpServletResponse response,Model model) {
+		buildPageRequest(request);
+		Page<PhotoFile> page = photoFileService.getAll(pageRequest);
+		model.addAttribute("page", page);
+		return "admin/fileList";
 	}
 
-	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("user", userService.getUser(id));
-		return "account/adminUserForm";
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "enable/{id}")
+	@ResponseBody
+	public boolean enable(@PathVariable("id") Long id,Model model) {
+		photoFileService.changeStatus(id, Status.CHECK_SUCCESS);
+		return true;
+	}
+	@RequestMapping(value = "disable/{id}")
+	@ResponseBody
+	public boolean disable(@PathVariable("id") Long id,Model model) {
+		photoFileService.changeStatus(id, Status.CHECK_FAIL);
+		return true;
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
-		userService.updateUser(user);
-		redirectAttributes.addFlashAttribute("message", "更新用户" + user.getLoginName() + "成功");
-		return "redirect:/admin/user";
-	}
 
 	@RequestMapping(value = "delete/{id}")
 	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {

@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.fileupload.FileItem;
@@ -16,16 +21,21 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.coffee.photo.entity.account.User;
 import com.coffee.photo.entity.file.PhotoFile;
+import com.coffee.photo.entity.file.PhotoFile.Status;
 import com.coffee.photo.repository.file.PhotoFileDao;
 import com.coffee.photo.service.account.UserService;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
 import com.coffee.photo.utils.FileUtils;
 import com.coffee.photo.utils.ImageUtils;
+import com.google.common.collect.Lists;
 
 @Component
 @Transactional
@@ -45,17 +55,16 @@ public class PhotoFileService {
 		DiskFileItemFactory fac = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(fac);
 		upload.setHeaderEncoding("utf-8");
-		List fileList = null;
+		List<FileItem> fileList = null;
 		try {
 			fileList = upload.parseRequest(request);
 		} catch (FileUploadException ex) {
 			ex.printStackTrace();
 			return;
 		}
-		for (Object object : fileList) {
+		for (FileItem item : fileList) {
 			PhotoFile photoFile=new PhotoFile();
 			// if (object instanceof FileItem) {
-			FileItem item = (FileItem) object;
 			if (item.isFormField()) {
 				continue;
 			}
@@ -82,15 +91,19 @@ public class PhotoFileService {
 				photoFile.setWidth(map.get("width"));
 			}
 			photoFile.setCreateDate(new Date());
-			ShiroUser user=userService.getCurrentUser();
-			photoFile.setCreateUserId(user.id);
-			photoFile.setCreateUserLoginName(user.loginName);
-			photoFile.setCreateUserNickName(user.nickName);
+			ShiroUser shiroUser=userService.getCurrentUser();
+			User user=userService.getUser(shiroUser.id);
+			photoFile.setCreateUserId(shiroUser.id);
+			photoFile.setCreateUserLoginName(shiroUser.loginName);
+			photoFile.setCreateUserNickName(shiroUser.nickName);
 			photoFile.setSourceFileLength(size);
 			photoFile.setSourceFileName(fileName);
 			photoFile.setSourceFilePath(savePath);
 			photoFile.setUploadType(0);
+			photoFile.setStatus(Status.UPLOAD_SUCCESS);
 			photoFileDao.save(photoFile);
+			user.setUploadNum(user.getUploadNum()+1);
+			userService.updateUser(user);
 		}
 	}
 
@@ -127,11 +140,111 @@ public class PhotoFileService {
 				photoFile.setSourceFileName(fileName);
 				photoFile.setSourceFilePath(filePath);
 				photoFile.setUploadType(1);
+				photoFile.setStatus(Status.UPLOAD_SUCCESS);
 				photoFileDao.save(photoFile);
+				user.setUploadNum(user.getUploadNum()+1);
+				userService.updateUser(user);
 			}else{
 				throw new FtpException("ftp上传入库失败");
 			}
 		}
+	
+	public boolean deleteFile(Long id){
+		ShiroUser shiroUser=userService.getCurrentUser();
+		User user=userService.getUser(shiroUser.id);
+		Long uploadNum=user.getUploadNum();
+		if (uploadNum!=null&&uploadNum>0) {
+			user.setUploadNum(user.getUploadNum()-1);
+			userService.updateUser(user);
+		}
+		return true;
+	}
+	public PhotoFile get(Long id){
+		return photoFileDao.findOne(id);
+	}
+	public PhotoFile save(PhotoFile photoFile){
+		return photoFileDao.save(photoFile);
+	}
+	public PhotoFile changeStatus(Long id,Status status){
+		PhotoFile file=photoFileDao.findOne(id);
+		file.setStatus(status);
+		return photoFileDao.save(file);
+	}
+	public Page<PhotoFile> getAll(Pageable pageRequest) {
+		Page<PhotoFile> page = photoFileDao.findAll(pageRequest);
+		return page;
+	}
+	public Page<PhotoFile> search(String title, String memo, String createUserLoginName, String createUserNickName, Integer type,
+			Date startDate, Date endDate, Integer status,Integer uploadType,Integer searchType, Pageable pageRequest) {
+		Page<PhotoFile> photoFileList = photoFileDao.findAll(getSpec(title, memo, createUserLoginName,  createUserNickName,  type,
+				startDate,endDate, status,uploadType,searchType), pageRequest);
+		return photoFileList;
+	}
+
+	public Specification<PhotoFile> getSpec(final String title, final String memo, final String createUserLoginName,final  String createUserNickName,final  Integer type,
+			final Date startDate,final  Date endDate,final  Integer status,final Integer uploadType,final Integer searchType) {
+		return new Specification<PhotoFile>() {
+			@Override
+			public Predicate toPredicate(Root<PhotoFile> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				List<Predicate> predicates = Lists.newArrayList();
+				Path<String> createUserLoginNamePath = root.get("createUserLoginName");
+				Path<Integer> typePath = root.get("type");
+				Path<Integer> uploadTypePath = root.get("uploadType");
+				Path<String> titlePath = root.get("title");
+				Path<String> memoPath = root.get("memo");
+				Path<Integer> statusPath = root.get("status");
+				Path<String> createUserNickNamePath = root.get("createUserNickName");
+				Path<Date> createDatePath = root.get("createDate");
+				if (StringUtils.isNotBlank(createUserLoginName)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(createUserLoginNamePath, createUserLoginName));
+					} else {
+						predicates.add(cb.like(createUserLoginNamePath, "%" + createUserLoginName + "%"));
+					}
+				}
+				if (StringUtils.isNotBlank(title)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(titlePath, title));
+					} else {
+						predicates.add(cb.like(titlePath, "%" + title + "%"));
+					}
+				}
+				if (StringUtils.isNotBlank(memo)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(memoPath, memo));
+					} else {
+						predicates.add(cb.like(memoPath, "%" + memo + "%"));
+					}
+				}
+				if (uploadType != null) {
+					predicates.add(cb.equal(uploadTypePath, uploadType));
+				}
+				if (type != null) {
+					predicates.add(cb.equal(typePath, type));
+				}
+				if (status != null) {
+					predicates.add(cb.equal(statusPath, status));
+				}
+				if (StringUtils.isNotBlank(createUserNickName)) {
+					if ((searchType != null) && (searchType.intValue() == 0)) {
+						predicates.add(cb.equal(createUserNickNamePath, createUserNickName));
+					} else {
+						predicates.add(cb.like(createUserNickNamePath, "%" + createUserNickName + "%"));
+					}
+				}
+				
+				if (startDate != null) {
+					predicates.add(cb.greaterThanOrEqualTo(createDatePath, startDate));
+				}
+				if (endDate != null) {
+					predicates.add(cb.lessThanOrEqualTo(createDatePath, endDate));
+				}
+
+				Predicate[] arr = predicates.toArray(new Predicate[predicates.size()]);
+				return query.where(arr).getRestriction();
+			}
+		};
+	}
 	public boolean checkExt(String fileName){
 		String ext=fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
 		if (StringUtils.isNotBlank(enableExt)&&StringUtils.isNotBlank(ext)) {

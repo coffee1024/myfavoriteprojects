@@ -58,6 +58,7 @@ public class User extends IdEntity {
 	private String password;
 	private String salt;
 	private String roles;
+	private String permissions;
 	private Date registerDate;
 	/**
 	 * 用户状态0 启用 -1 停用
@@ -93,6 +94,10 @@ public class User extends IdEntity {
 	private Double star;
 
 	private Integer userType;
+	/**
+	 * 上传文件数量
+	 */
+	private Long uploadNum;
 
 	public User() {
 
@@ -100,6 +105,22 @@ public class User extends IdEntity {
 
 	public User(Long id) {
 		this.id = id;
+	}
+
+	public String getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
+	}
+
+	public Long getUploadNum() {
+		return uploadNum;
+	}
+
+	public void setUploadNum(Long uploadNum) {
+		this.uploadNum = uploadNum;
 	}
 
 	@NotBlank
@@ -264,6 +285,12 @@ public class User extends IdEntity {
 	public List<String> getRoleList() {
 		// 角色列表在数据库中实际以逗号分隔字符串存储，因此返回不能修改的List.
 		return ImmutableList.copyOf(StringUtils.split(roles, ","));
+	}
+	@Transient
+	@JsonIgnore
+	public List<String> getPermissionList() {
+		// 角色列表在数据库中实际以逗号分隔字符串存储，因此返回不能修改的List.
+		return ImmutableList.copyOf(StringUtils.split(permissions, ","));
 	}
 
 	// 设定JSON序列化时的日期格式
