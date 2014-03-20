@@ -143,7 +143,7 @@ public class UserService {
 				Path<String> loginNamePath = root.get("loginName");
 				Path<Integer> userTypePath = root.get("userType");
 				Path<String> emailPath = root.get("email");
-				Path<String> statusPath = root.get("status");
+				Path<Integer> statusPath = root.get("status");
 				Path<String> namePath = root.get("nickName");
 				Path<Date> registerDatePath = root.get("registerDate");
 				if (StringUtils.isNotBlank(loginName)) {

@@ -32,6 +32,9 @@ public class PhotoFile extends IdEntity {
 	private String createUserLoginName;
 	private String createUserNickName;
 	private Integer type;
+	/**
+	 * tuijian
+	 */
 	private Integer recommend;
 	private String extName;
 	private Boolean isOriginal;
@@ -123,8 +126,8 @@ public class PhotoFile extends IdEntity {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setStatus(Status status) {
+		this.status = status.getValues();
 	}
 
 	// 设定JSON序列化时的日期格式
@@ -196,5 +199,29 @@ public class PhotoFile extends IdEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+	
+	/**
+	 * 图片分类操作权限
+	 * 	 UPLOAD_SUCCESS(0)上传未填写说明
+	 *	 WAIT_CHECK(1) 填写说明未审核
+	 *	 CHECK_SUCCESS(2) 审核通过
+	 *	 CHECK_FAIL(3) 审核bu通过
+	 */
+	public enum Status{
+//		 0上传未填写说明
+//		 1 填写说明未审核
+//		 2 审核通过
+		UPLOAD_SUCCESS(0), 
+		WAIT_CHECK(1),
+		CHECK_SUCCESS(2),
+		CHECK_FAIL(3);
+		private Integer status;
+		Status(Integer status){
+			this.status=status;
+		}
+		public Integer getValues(){
+			return this.status;
+		}
 	}
 }
