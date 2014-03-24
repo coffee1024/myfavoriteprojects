@@ -8,8 +8,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ import com.coffee.photo.entity.account.User;
 import com.coffee.photo.repository.account.UserDao;
 import com.coffee.photo.service.ServiceException;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
+import com.coffee.photo.service.ftp.FtpService;
 import com.coffee.photo.utils.Clock;
 import com.coffee.photo.utils.Digests;
 import com.coffee.photo.utils.Encodes;
@@ -44,10 +47,12 @@ public class UserService {
 	private static final int SALT_SIZE = 8;
 
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
-
+	@Autowired
 	private UserDao userDao;
 	private Clock clock = Clock.DEFAULT;
-
+	@Autowired
+	private FtpService ftpService;
+	
 	public List<User> getAllUser() {
 		return (List<User>) userDao.findAll();
 	}
@@ -60,11 +65,34 @@ public class UserService {
 		return userDao.findByLoginName(loginName);
 	}
 
-	public void registerUser(User user) {
+	public void registerUser(User user,HttpServletRequest request) {
 		entryptPassword(user);
 		user.setRoles("user");
+		user.setPermissions("index");
 		user.setRegisterDate(clock.getCurrentDate());
-		userDao.save(user);
+		try {
+			ftpService.registerFtpUser(request, user);
+			userDao.save(user);
+		} catch (FtpException e) {
+			e.printStackTrace();
+			ftpService.deleteFtpUser(request, user);
+		}
+		logger.info("register user: {0}.",user.getLoginName());
+	}
+	
+	public boolean doesExist(String loginName){
+		if (findUserByLoginName(loginName)==null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	public boolean doesExist(User user){
+		if (findUserByLoginName(user.getLoginName())==null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public void updateUser(User user) {
@@ -72,6 +100,7 @@ public class UserService {
 			entryptPassword(user);
 		}
 		userDao.save(user);
+		logger.info("update user: {0}.",user);
 	}
 
 	public void deleteUser(Long id) {
@@ -80,7 +109,7 @@ public class UserService {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
-
+		logger.info("delete user: {0}.",id);
 	}
 
 	/**
@@ -116,10 +145,6 @@ public class UserService {
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
 
-	@Autowired
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
 
 	public void setClock(Clock clock) {
 		this.clock = clock;
@@ -138,7 +163,6 @@ public class UserService {
 		return new Specification<User>() {
 			@Override
 			public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				// TODO Auto-generated method stub
 				List<Predicate> predicates = Lists.newArrayList();
 				Path<String> loginNamePath = root.get("loginName");
 				Path<Integer> userTypePath = root.get("userType");

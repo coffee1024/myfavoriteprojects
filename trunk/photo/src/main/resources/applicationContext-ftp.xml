@@ -30,7 +30,7 @@
     </listeners>
     <ftplets>
         <ftplet name="ftplet1">
-            <beans:bean id="ftpService" class="com.coffee.photo.utils.ftp.FtpService">
+            <beans:bean id="ftpService" class="com.coffee.photo.utils.ftp.FtpFtplet">
             </beans:bean>
         </ftplet>
     </ftplets>

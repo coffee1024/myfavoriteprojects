@@ -38,20 +38,20 @@ public class AccountServiceTest {
 		ShiroTestUtils.mockSubject(new ShiroUser(3L, "foo", "Foo"));
 	}
 
-	@Test
-	public void registerUser() {
-		User user = UserData.randomNewUser();
-		Date currentTime = new Date();
-		accountService.setClock(new MockClock(currentTime));
-
-		accountService.registerUser(user);
-
-		// 验证user的角色，注册日期和加密后的密码都被自动更新了。
-		assertThat(user.getRoles()).isEqualTo("user");
-		assertThat(user.getRegisterDate()).isEqualTo(currentTime);
-		assertThat(user.getPassword()).isNotNull();
-		assertThat(user.getSalt()).isNotNull();
-	}
+//	@Test
+//	public void registerUser() {
+//		User user = UserData.randomNewUser();
+//		Date currentTime = new Date();
+//		accountService.setClock(new MockClock(currentTime));
+//
+//		accountService.registerUser(user);
+//
+//		// 验证user的角色，注册日期和加密后的密码都被自动更新了。
+//		assertThat(user.getRoles()).isEqualTo("user");
+//		assertThat(user.getRegisterDate()).isEqualTo(currentTime);
+//		assertThat(user.getPassword()).isNotNull();
+//		assertThat(user.getSalt()).isNotNull();
+//	}
 
 	@Test
 	public void updateUser() {
