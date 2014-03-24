@@ -3,6 +3,7 @@ package com.coffee.photo.entity.account;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -114,7 +115,8 @@ public class User extends IdEntity {
 	public void setPermissions(String permissions) {
 		this.permissions = permissions;
 	}
-
+	
+	@Column(columnDefinition="default 0")
 	public Long getUploadNum() {
 		return uploadNum;
 	}

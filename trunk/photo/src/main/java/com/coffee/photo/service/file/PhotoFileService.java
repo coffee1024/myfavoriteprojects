@@ -1,6 +1,8 @@
 package com.coffee.photo.service.file;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,7 @@ import com.coffee.photo.entity.file.PhotoFile.Status;
 import com.coffee.photo.repository.file.PhotoFileDao;
 import com.coffee.photo.service.account.UserService;
 import com.coffee.photo.service.account.ShiroDbRealm.ShiroUser;
+import com.coffee.photo.utils.FileMD5;
 import com.coffee.photo.utils.FileUtils;
 import com.coffee.photo.utils.ImageUtils;
 import com.google.common.collect.Lists;
@@ -89,6 +92,12 @@ public class PhotoFileService {
 				e.printStackTrace();
 				continue;
 			}
+			try {
+				String md5=FileMD5.getFileMD5String(saveFile);
+				photoFile.setMd5(md5);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			Map<String, Integer> map=ImageUtils.getPictureSize(savePath);
 			if (map!=null) {
 				photoFile.setHeight(map.get("height"));
@@ -128,10 +137,24 @@ public class PhotoFileService {
 		return sResult;
 	}
 	public void saveFtpFile(String filePath,String fileName,User user) throws FtpException {
-			
-			File file=new File(filePath);
+			String path=getFilePath(originalFilePath, fileName);
+			File file= new File(path);
+			//创建目录
+			FileUtils.makeDirectory(file);
+			try {
+				FileUtils.copyFile(filePath, path);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new FtpException("ftp上传入库失败");
+			}
 			if (file.exists()&&user!=null) {
 				PhotoFile photoFile=new PhotoFile();
+				try {
+					String md5=FileMD5.getFileMD5String(file);
+					photoFile.setMd5(md5);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				Map<String, Integer> map=ImageUtils.getPictureSize(filePath);
 				if (map!=null) {
 					photoFile.setHeight(map.get("height"));
@@ -143,18 +166,28 @@ public class PhotoFileService {
 				photoFile.setCreateUserNickName(user.getNickName());
 				photoFile.setSourceFileLength(file.length());
 				photoFile.setSourceFileName(fileName);
-				photoFile.setSourceFilePath(filePath);
+				photoFile.setSourceFilePath(path);
 				photoFile.setUploadType(1);
 				photoFile.setStatus(Status.UPLOAD_SUCCESS);
 				photoFileDao.save(photoFile);
-				user.setUploadNum(user.getUploadNum()+1);
+				Long uploadNum=user.getUploadNum();
+				if (uploadNum!=null) {
+					user.setUploadNum(user.getUploadNum()+1);
+				}else{
+					user.setUploadNum(1L);
+				}
 				userService.updateUser(user);
 				logger.info("{0} save ftp file {1}",user.getLoginName(),photoFile.getSourceFilePath());
 			}else{
+				file.deleteOnExit();
 				throw new FtpException("ftp上传入库失败");
 			}
 		}
-	
+	/*用户删除文件
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public boolean deleteFile(Long id){
 		ShiroUser shiroUser=userService.getCurrentUser();
 		User user=userService.getUser(shiroUser.id);
@@ -163,6 +196,9 @@ public class PhotoFileService {
 			user.setUploadNum(user.getUploadNum()-1);
 			userService.updateUser(user);
 		}
+		PhotoFile photoFile=photoFileDao.findOne(id);
+		File file=new File(photoFile.getSourceFilePath());
+		file.deleteOnExit();
 		return true;
 	}
 	public PhotoFile get(Long id){
