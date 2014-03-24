@@ -3,6 +3,7 @@ package com.coffee.photo.utils.ftp;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ftpserver.ftplet.DefaultFtplet;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.ftplet.FtpReply;
@@ -69,19 +70,6 @@ public class FtpFtplet extends DefaultFtplet{
 		return super.onConnect(session);
 	}
 
-	@Override
-	public FtpletResult onDeleteEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onDeleteEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onDeleteStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onDeleteStart(session, request);
-	}
 
 	@Override
 	public FtpletResult onDisconnect(FtpSession session) throws FtpException,
@@ -90,19 +78,6 @@ public class FtpFtplet extends DefaultFtplet{
 		return super.onDisconnect(session);
 	}
 
-	@Override
-	public FtpletResult onDownloadEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onDownloadEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onDownloadStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onDownloadStart(session, request);
-	}
 
 	@Override
 	public FtpletResult onLogin(FtpSession session, FtpRequest request)
@@ -111,47 +86,6 @@ public class FtpFtplet extends DefaultFtplet{
 		return super.onLogin(session, request);
 	}
 
-	@Override
-	public FtpletResult onMkdirEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onMkdirEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onMkdirStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onMkdirStart(session, request);
-	}
-
-	@Override
-	public FtpletResult onRenameEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onRenameEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onRenameStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onRenameStart(session, request);
-	}
-
-	@Override
-	public FtpletResult onRmdirEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onRmdirEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onRmdirStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onRmdirStart(session, request);
-	}
 
 	@Override
 	public FtpletResult onSite(FtpSession session, FtpRequest request)
@@ -163,11 +97,44 @@ public class FtpFtplet extends DefaultFtplet{
 	@Override
 	public FtpletResult onUploadEnd(FtpSession session, FtpRequest request)
 			throws FtpException, IOException {
-		// TODO Auto-generated method stub
+//		String path=session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
+//		String name=request.getArgument();
+//		String root=session.getUser().getHomeDirectory();
+//		String filePath="";
+//		if (StringUtils.equals(path, "/")) {
+//			filePath=root+File.separator+name;
+//		}else{
+//			filePath=root+StringUtils.replace(path, "/", File.separator)+File.separator+name;
+//		}
+//		User ftpUser=session.getUser();
+//		com.coffee.photo.entity.account.User user=userService.findUserByLoginName(ftpUser.getName());
+//		photoFileService.saveFtpFile(filePath, name, user);
+		return super.onUploadEnd(session, request);
+	}
+
+	@Override
+	public FtpletResult onUploadStart(FtpSession session, FtpRequest request)
+			throws FtpException, IOException {
+		String name=request.getArgument();
+//		if (photoFileService.checkExt(name)) {
+			return super.onUploadStart(session, request);
+//		} else {
+//			return FtpletResult.DISCONNECT;
+//		}
+	}
+
+	@Override
+	public FtpletResult onUploadUniqueEnd(FtpSession session, FtpRequest request)
+			throws FtpException, IOException {
 		String path=session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
 		String name=request.getArgument();
 		String root=session.getUser().getHomeDirectory();
-		String filePath=root+File.separator+path+File.separator+name;
+		String filePath="";
+		if (StringUtils.equals(path, "/")) {
+			filePath=root+File.separator+name;
+		}else{
+			filePath=root+StringUtils.replace(path, "/", File.separator)+File.separator+name;
+		}
 		User ftpUser=session.getUser();
 		com.coffee.photo.entity.account.User user=userService.findUserByLoginName(ftpUser.getName());
 		photoFileService.saveFtpFile(filePath, name, user);
@@ -175,30 +142,14 @@ public class FtpFtplet extends DefaultFtplet{
 	}
 
 	@Override
-	public FtpletResult onUploadStart(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-//		throw new FtpException("禁止上传");
+	public FtpletResult onUploadUniqueStart(FtpSession session,
+			FtpRequest request) throws FtpException, IOException {
 		String name=request.getArgument();
 		if (photoFileService.checkExt(name)) {
 			return super.onUploadStart(session, request);
 		} else {
 			return FtpletResult.DISCONNECT;
 		}
-	}
-
-	@Override
-	public FtpletResult onUploadUniqueEnd(FtpSession session, FtpRequest request)
-			throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onUploadUniqueEnd(session, request);
-	}
-
-	@Override
-	public FtpletResult onUploadUniqueStart(FtpSession session,
-			FtpRequest request) throws FtpException, IOException {
-		// TODO Auto-generated method stub
-		return super.onUploadUniqueStart(session, request);
 	}
 	
 }

@@ -38,6 +38,8 @@ public class PhotoFile extends IdEntity {
 	private Integer recommend;
 	private String extName;
 	private Boolean isOriginal;
+	
+	private String md5;
 	/**
 	 * 图片状态  0 上传未填写说明
 	 * 			1 填写说明未审核
@@ -194,6 +196,15 @@ public class PhotoFile extends IdEntity {
 
 	public void setUploadType(Integer uploadType) {
 		this.uploadType = uploadType;
+	}
+	
+
+	public String getMd5() {
+		return md5;
+	}
+
+	public void setMd5(String md5) {
+		this.md5 = md5;
 	}
 
 	@Override

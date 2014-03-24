@@ -17,7 +17,7 @@
 	</appender>
 
 	<!-- project default level -->
-	<logger name="com.coffee.photo" level="debug" />
+	<logger name="com.coffee.photo" level="error" />
 
 	<!--log4jdbc -->
 	<logger name="jdbc.sqltiming" level="error"/>
