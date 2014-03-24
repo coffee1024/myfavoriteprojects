@@ -19,6 +19,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.ftpserver.ftplet.FtpException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -49,6 +51,8 @@ public class PhotoFileService {
 	private PhotoFileDao photoFileDao;
 	@Autowired
 	private UserService userService;
+	
+	private static Logger logger = LoggerFactory.getLogger(PhotoFileService.class);
 	
 	public void saveHttpFile(HttpServletRequest request) {
 		
@@ -104,6 +108,7 @@ public class PhotoFileService {
 			photoFileDao.save(photoFile);
 			user.setUploadNum(user.getUploadNum()+1);
 			userService.updateUser(user);
+			logger.info("{0} save http file {1}",user.getLoginName(),photoFile.getSourceFilePath());
 		}
 	}
 
@@ -144,6 +149,7 @@ public class PhotoFileService {
 				photoFileDao.save(photoFile);
 				user.setUploadNum(user.getUploadNum()+1);
 				userService.updateUser(user);
+				logger.info("{0} save ftp file {1}",user.getLoginName(),photoFile.getSourceFilePath());
 			}else{
 				throw new FtpException("ftp上传入库失败");
 			}
@@ -168,6 +174,7 @@ public class PhotoFileService {
 	public PhotoFile changeStatus(Long id,Status status){
 		PhotoFile file=photoFileDao.findOne(id);
 		file.setStatus(status);
+		
 		return photoFileDao.save(file);
 	}
 	public Page<PhotoFile> getAll(Pageable pageRequest) {

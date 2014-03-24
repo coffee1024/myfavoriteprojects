@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.coffee.photo.service.account.UserService;
 import com.coffee.photo.service.file.PhotoFileService;
 
-public class FtpService extends DefaultFtplet{
+public class FtpFtplet extends DefaultFtplet{
 
 	@Autowired
 	private UserService userService;
