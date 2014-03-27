@@ -48,7 +48,7 @@
 								<s:if test="#session.loginUser.adminGroup.level<=1 ">
 									<li><a class="head">用户管理</a>
 										<ul>
-											<li><a href="getalluser">用户列表</a></li>
+											<li><a href="${ctx}/admin/user">用户列表</a></li>
 											<li><a href="toadduser">添加员工</a></li>
 										</ul></li>
 								</s:if>

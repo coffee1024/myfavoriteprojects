@@ -55,19 +55,19 @@ a img {
 											cellspacing="0">
 											<tr>
 												<td height="17"><div align="right">
-														<a href="tochangepwd" ><img
+														<a href="#" ><img
 															src="${ctx}/static/images/pass.gif" width="69" height="17" />
 														</a>
 													</div>
 												</td>
 												<td><div align="right">
-														<a href="touserinfo?uid=<s:property value='#session.loginUser.id'/>" ><img
+														<a href="#" ><img
 															src="${ctx}/static/images/user.gif" width="69" height="17" />
 														</a>
 													</div>
 												</td>
 												<td><div align="right">
-														<a href="logout" target="_parent"><img
+														<a href="${ctx}/logout" target="_parent"><img
 															src="${ctx}/static/images/quit.gif" alt=" " width="69" height="17" />
 														</a>
 													</div>

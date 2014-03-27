@@ -46,7 +46,7 @@ public class PhotoFileAdminController extends BaseController {
 		buildPageRequest(request);
 		Page<PhotoFile> page = photoFileService.getAll(pageRequest);
 		model.addAttribute("page", page);
-		return "admin/fileList";
+		return "admin/file/adminFileList";
 	}
 
 	/**

@@ -16,10 +16,10 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead><tr><th>登录名</th><th>用户名</th><th>注册时间<th>管理</th></tr></thead>
 		<tbody>
-		<c:forEach items="${users}" var="user">
+		<c:forEach items="${page.content}" var="file">
 			<tr>
 				<td><a href="${ctx}/admin/user/update/${user.id}">${user.loginName}</a></td>
-				<td>${user.name}</td>
+				<td>${user.nickName}</td>
 				<td>
 					<fmt:formatDate value="${user.registerDate}" pattern="yyyy年MM月dd日  HH时mm分ss秒" />
 				</td>
