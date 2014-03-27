@@ -53,8 +53,8 @@ public class UserService {
 	@Autowired
 	private FtpService ftpService;
 	
-	public List<User> getAllUser() {
-		return (List<User>) userDao.findAll();
+	public Page<User> getAllUser(Pageable pageRequest) {
+		return userDao.findAll(pageRequest);
 	}
 
 	public User getUser(Long id) {

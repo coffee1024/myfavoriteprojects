@@ -38,18 +38,23 @@ public class UserAdminController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model) {
-		List<User> users = userService.getAllUser();
-		model.addAttribute("users", users);
+	@RequestMapping
+	public String list(HttpServletRequest request,Model model) {
+		buildPageRequest(request);
+		Page<User> page = userService.getAllUser(pageRequest);
+		model.addAttribute("page", page);
 
-		return "account/adminUserList";
+		return "admin/user/adminUserList";
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("user", userService.getUser(id));
-		return "account/adminUserForm";
+		return "admin/user/adminUserForm";
+	}
+	@RequestMapping(value = "add", method = RequestMethod.GET)
+	public String addForm( Model model) {
+		return "admin/user/adminUserForm";
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
