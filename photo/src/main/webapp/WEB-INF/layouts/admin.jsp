@@ -46,37 +46,37 @@
 						<div style="height: 100%;">
 							<ul id="navigation">
 								<s:if test="#session.loginUser.adminGroup.level<=1 ">
-									<li><a class="head">系统管理</a>
+									<li><a class="head">用户管理</a>
 										<ul>
-											<li><a href="getalluser" target="rightFrame">员工信息</a></li>
-											<li><a href="toadduser" target="rightFrame">添加员工</a></li>
+											<li><a href="getalluser">用户列表</a></li>
+											<li><a href="toadduser">添加员工</a></li>
 										</ul></li>
 								</s:if>
 								<s:if test="#session.loginUser.adminGroup.level<=1 ">
-									<li><a class="head">基础信息</a>
+									<li><a class="head">文件管理</a>
 										<ul>
-											<li><a href="getallcustomer" target="rightFrame">客户信息</a>
+											<li><a href="getallcustomer" >客户信息</a>
 											</li>
-											<li><a href="toaddcustomer" target="rightFrame">添加客户</a>
+											<li><a href="toaddcustomer" >添加客户</a>
 											</li>
-											<li><a href="getallagency" target="rightFrame">旅行社信息</a>
+											<li><a href="getallagency" >旅行社信息</a>
 											</li>
 											<li><a href="${ctx}/admin/toaddagency"
-												target="rightFrame">添加旅行社</a></li>
-											<li><a href="getallroute" target="rightFrame">线路信息</a></li>
+												>添加旅行社</a></li>
+											<li><a href="getallroute" >线路信息</a></li>
 											<li><a href="${ctx}/admin/toaddroute"
-												target="rightFrame">添加线路</a></li>
+												>添加线路</a></li>
 										</ul></li>
 								</s:if>
 								<li><a class="head">信息查询</a>
 									<ul>
-										<li><a href="tosearchagency" target="rightFrame">旅行社信息查询</a>
+										<li><a href="tosearchagency" >旅行社信息查询</a>
 										</li>
-										<li><a href="tosearchroute" target="rightFrame">线路信息查询</a>
+										<li><a href="tosearchroute" >线路信息查询</a>
 										</li>
-										<!-- 					<li><a href="tosearchuser" target="rightFrame">员工信息查询</a> -->
+										<!-- 					<li><a href="tosearchuser" >员工信息查询</a> -->
 										<!-- 					</li> -->
-										<!-- 					<li><a href="tosearchcustomer" target="rightFrame">客户信息查询</a> -->
+										<!-- 					<li><a href="tosearchcustomer" >客户信息查询</a> -->
 										<!-- 					</li> -->
 									</ul></li>
 								<s:if test="#session.loginUser.adminGroup.level<=0 ">
@@ -84,8 +84,8 @@
 										<ul>
 											<li><a
 												onclick="javascript:return window.confirm('进行数据库备份吗')"
-												href="tobackup" target="rightFrame">数据库备份</a></li>
-											<li><a href="toload" target="rightFrame">数据库恢复</a></li>
+												href="tobackup" >数据库备份</a></li>
+											<li><a href="toload" >数据库恢复</a></li>
 										</ul></li>
 								</s:if>
 								<li><a class="head">版本信息</a>
