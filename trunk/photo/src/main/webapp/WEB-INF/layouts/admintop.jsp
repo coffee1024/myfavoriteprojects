@@ -55,13 +55,13 @@ a img {
 											cellspacing="0">
 											<tr>
 												<td height="17"><div align="right">
-														<a href="tochangepwd" target="rightFrame"><img
+														<a href="tochangepwd" ><img
 															src="${ctx}/static/images/pass.gif" width="69" height="17" />
 														</a>
 													</div>
 												</td>
 												<td><div align="right">
-														<a href="touserinfo?uid=<s:property value='#session.loginUser.id'/>" target="rightFrame"><img
+														<a href="touserinfo?uid=<s:property value='#session.loginUser.id'/>" ><img
 															src="${ctx}/static/images/user.gif" width="69" height="17" />
 														</a>
 													</div>
@@ -94,7 +94,7 @@ a img {
 										height="14" />
 									</td>
 									<td width="35" class="STYLE7"><div align="center">
-											<a href="#" target="rightFrame">首页</a>
+											<a href="#" >首页</a>
 										</div>
 									</td>
 									<td width="21" class="STYLE7"><img
