@@ -1,0 +1,295 @@
+BODY {
+	MARGIN-TOP: 0px;
+	MARGIN-left: 0px;
+	MARGIN-right: 0px;
+	MARGIN-bottom: 0px;
+	FONT-SIZE: 12px;
+	BACKGROUND: #E7E7E5;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+TD {
+	FONT-SIZE: 12px
+}
+
+SELECT {
+	BORDER-TOP-WIDTH: 1px;
+	BORDER-LEFT-WIDTH: 1px;
+	FONT-SIZE: 12px;
+	BORDER-BOTTOM-WIDTH: 1px;
+	BORDER-RIGHT-WIDTH: 1px
+}
+
+A:link {
+	COLOR: #205CB2;
+	TEXT-DECORATION: none
+}
+
+A:visited {
+	COLOR: #205CB2;
+	TEXT-DECORATION: none
+}
+
+A:hover {
+	COLOR: #0066cc;
+	TEXT-DECORATION: underline
+}
+
+A.tab_link:link {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: nomal;
+}
+
+A.tab_link:visited {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: nomal;
+}
+
+A.tab_link:hover {
+	text-decoration: sub;
+	color: #2C4973;
+	font-weight: nomal;
+}
+
+A.navigation_channel_link:link {
+	text-decoration: none;
+	color: #124190;
+}
+
+A.navigation_channel_link:visited {
+	text-decoration: none;
+	color: #124190;
+}
+
+A.navigation_channel_link:hover {
+	text-decoration: underline;
+	color: #124190;
+}
+
+A.navigation_page_link:link {
+	text-decoration: none;
+	color: #124190;
+}
+
+A.navigation_page_link:visited {
+	text-decoration: none;
+	color: #124190;
+}
+
+A.navigation_page_link:hover {
+	text-decoration: underline;
+	color: #124190;
+}
+
+.navigation_channel {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	color: #124190;
+	text-decoration: none;
+}
+
+.navigation_page {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	color: #666666;
+	text-decoration: none;
+}
+
+.navigation_channel_td {
+	text-align: right;
+}
+
+.navigation_page_td {
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	text-align: right;
+}
+
+A.copyrights_trs:link {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #124190;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+A.copyrights_trs:visited {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #124190;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+A.copyrights_trs:hover {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #124190;
+	text-decoration: underline;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.windowname {
+	position: relative;
+	top: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #ffffFF;
+}
+
+.tree_td {
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 0px;
+	padding-top: 5px;
+	vertical-align: top;
+}
+
+.nomalwindow_td {
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	vertical-align: top;
+}
+
+.font_red {
+	font-size: 12px;
+	color: red;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.font_white {
+	font-size: 12px;
+	font-weight: nomal;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.helptitle {
+	font-size: 16px;
+	font-weight: bold;
+	color: #124190;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+A.white_link:link {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: nomal;
+}
+
+A.white_link:visited {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: nomal;
+}
+
+A.white_link:hover {
+	text-decoration: sub;
+	color: #BED2ED;
+	font-weight: nomal;
+}
+
+/* 
+ * add by Liushen
+ */
+.tab_td {
+	text-align: center;
+	border-top: 1px solid #92B2E1;
+	border-left: 1px solid #92B2E1;
+	border-right: 1px solid #406393;
+}
+
+.gray_btm_line {
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.copy_right {
+	position: relative;
+	left: 0px;
+	top: 4px;
+}
+
+.fakeLink {
+	COLOR: #205CB2;
+	cursor: pointer;
+}
+
+form {
+	padding: 0px;
+	margin: 0px;
+}
+
+/*
+ * add by Liu Daoru
+ */
+a.trs_tree_style:link {
+	color: #205CB2;
+}
+
+a.trs_tree_style:visited {
+	color: #205Ca2;
+}
+
+a.trs_tree_style:hover {
+	color: #2253bb;
+}
+
+a.trs_tree_style:active {
+	color: #ff0000;
+}
+/*
+*管理员首页样式
+*/
+#navigation {
+	margin: 0px;
+	padding: 0px;
+	width: 147px;
+}
+
+#navigation a.head {
+	cursor: pointer;
+	background: url(。。/../../../static/images/main_34.gif) no-repeat scroll;
+	display: block;
+	font-weight: bold;
+	margin: 0px;
+	padding: 5px 0 5px;
+	text-align: center;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+#navigation ul {
+	border-width: 0px;
+	margin: 0px;
+	padding: 0px;
+	text-indent: 0px;
+}
+
+#navigation li {
+	list-style: none;
+	display: inline;
+}
+
+#navigation li li a {
+	display: block;
+	font-size: 12px;
+	text-decoration: none;
+	text-align: center;
+	padding: 3px;
+}
+
+#navigation li li a:hover {
+	background: url(。。/../../../static/images/tab_bg.gif) repeat-x;
+	border: solid 1px #adb9c2;
+}

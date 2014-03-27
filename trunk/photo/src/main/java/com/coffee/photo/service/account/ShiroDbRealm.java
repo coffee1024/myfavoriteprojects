@@ -33,7 +33,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		User user = userService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getNickName()),
+			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getNickName(),user.getRoles()),
 					user.getPassword(), ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
@@ -76,15 +76,21 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		public Long id;
 		public String loginName;
 		public String nickName;
+		public String roles;
 
-		public ShiroUser(Long id, String loginName, String nickName) {
+		public ShiroUser(Long id, String loginName, String nickName,String roles) {
 			this.id = id;
 			this.loginName = loginName;
 			this.nickName = nickName;
+			this.roles=roles;
 		}
 
 		public String getNickName() {
 			return nickName;
+		}
+
+		public String getRoles() {
+			return roles;
 		}
 
 		/**

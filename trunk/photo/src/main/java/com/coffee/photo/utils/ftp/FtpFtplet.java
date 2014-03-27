@@ -97,18 +97,18 @@ public class FtpFtplet extends DefaultFtplet{
 	@Override
 	public FtpletResult onUploadEnd(FtpSession session, FtpRequest request)
 			throws FtpException, IOException {
-//		String path=session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
-//		String name=request.getArgument();
-//		String root=session.getUser().getHomeDirectory();
-//		String filePath="";
-//		if (StringUtils.equals(path, "/")) {
-//			filePath=root+File.separator+name;
-//		}else{
-//			filePath=root+StringUtils.replace(path, "/", File.separator)+File.separator+name;
-//		}
-//		User ftpUser=session.getUser();
-//		com.coffee.photo.entity.account.User user=userService.findUserByLoginName(ftpUser.getName());
-//		photoFileService.saveFtpFile(filePath, name, user);
+		String path=session.getFileSystemView().getWorkingDirectory().getAbsolutePath();
+		String name=request.getArgument();
+		String root=session.getUser().getHomeDirectory();
+		String filePath="";
+		if (StringUtils.equals(path, "/")) {
+			filePath=root+File.separator+name;
+		}else{
+			filePath=root+StringUtils.replace(path, "/", File.separator)+File.separator+name;
+		}
+		User ftpUser=session.getUser();
+		com.coffee.photo.entity.account.User user=userService.findUserByLoginName(ftpUser.getName());
+		photoFileService.saveFtpFile(filePath, name, user);
 		return super.onUploadEnd(session, request);
 	}
 
@@ -116,11 +116,11 @@ public class FtpFtplet extends DefaultFtplet{
 	public FtpletResult onUploadStart(FtpSession session, FtpRequest request)
 			throws FtpException, IOException {
 		String name=request.getArgument();
-//		if (photoFileService.checkExt(name)) {
+		if (photoFileService.checkExt(name)) {
 			return super.onUploadStart(session, request);
-//		} else {
-//			return FtpletResult.DISCONNECT;
-//		}
+		} else {
+			return FtpletResult.DISCONNECT;
+		}
 	}
 
 	@Override
