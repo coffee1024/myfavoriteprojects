@@ -1,0 +1,1 @@
+function form_submit(){document.getElementById("login").submit()}function form_reset(){document.getElementById("login").reset()}function reloadcode(){var a=document.getElementById("safecode");a.setAttribute("src","code.php?"+Math.random())};
